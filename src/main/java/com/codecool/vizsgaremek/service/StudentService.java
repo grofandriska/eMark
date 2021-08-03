@@ -22,8 +22,8 @@ public class StudentService {
         this.studentMapper = studentMapper;
     }
 
-    public void save(Student student) {
-        studentRepository.save(student);
+    public void save(StudentDto student) {
+        studentRepository.save(studentMapper.convertStudentDtoToEntity(student));
     }
 
     public List<StudentDto> getAll() {

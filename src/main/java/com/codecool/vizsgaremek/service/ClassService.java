@@ -6,12 +6,15 @@ import com.codecool.vizsgaremek.mapper.ClassMapper;
 import com.codecool.vizsgaremek.modell.Class;
 import com.codecool.vizsgaremek.modell.dto.ClassDto;
 import com.codecool.vizsgaremek.repository.ClassRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ClassService {
 
     ClassRepository classRepository;
@@ -23,19 +26,12 @@ public class ClassService {
         this.classMapper = classMapper;
     }
 
-    public void addClass(Class newClass) {
-        List<Class> classResponseList;
-        classResponseList = classRepository.findAll();
-        for (Class classEntity : classResponseList) {
-            if (classEntity.getName().equals(newClass.getName())) {
-                Log.log.info("Class already exists,try again  with other name");
-                return;
-            }
-        }
-        classRepository.save(newClass);
-        if (classRepository.findAll().contains(newClass)) {
-            Log.log.info("Class added by id:" + newClass.getId());
-        }
+    @Transactional
+    public void addClass(ClassDto newClass) {
+        Class classE = classMapper.convertClassDtoToEntity(newClass);
+        classRepository.save(classE);
+        log.info("Szuper");
+
     }
 
     public List<ClassDto> listAllClass() {
@@ -76,7 +72,7 @@ public class ClassService {
 
     }
 
-    //??
+
     public void deleteClass(long id) {
         classRepository.deleteById(id);
     }

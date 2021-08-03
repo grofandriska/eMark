@@ -23,11 +23,11 @@ public class MarkService {
         this.markMapper = markMapper;
     }
 
-    public void add(Mark mark) {
-        markRepository.save(mark);
-        Log.log.info("mark added to " + mark.getStudent().getStudentName() +
+    public void add(MarkDto mark) {
+        markRepository.save(markMapper.convertMarkDtoToEntity(mark));
+       /* Log.log.info("mark added to " + mark.get.getStudentName() +
                 " [" + mark.getMark() + "] "
-                + mark.getStudent().getStudentClass());
+                + mark.getStudent().getStudentClass());*/
     }
 
     public MarkDto getMarkById(Long id) {

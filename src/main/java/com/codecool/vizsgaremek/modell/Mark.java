@@ -15,18 +15,6 @@ public class Mark {
     @OneToOne
     private Teacher teacher;
 
-    public Mark() {
-    }
-
-    public Mark(Long id, int mark, String subject, String month, Student student, Teacher teacher) {
-        this.id = id;
-        this.mark = mark;
-        this.subject = subject;
-        this.month = month;
-        this.student = student;
-        this.teacher = teacher;
-    }
-
     public Long getId() {
         return id;
     }

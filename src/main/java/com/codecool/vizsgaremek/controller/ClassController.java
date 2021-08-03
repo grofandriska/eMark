@@ -19,14 +19,14 @@ public class ClassController {
         this.classService = classService;
     }
 
-    @PutMapping("addClass")
-    public void add(@RequestBody Class classEntity) {
+    @PostMapping("addClass")
+    public void add(@RequestBody ClassDto classEntity) {
         classService.addClass(classEntity);
 
     }
 
     @DeleteMapping("deleteClass/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable("id") Long id) {
         classService.deleteClass(id);
     }
 
@@ -34,7 +34,7 @@ public class ClassController {
     @Operation(summary = "Update a single class by id .")
     @ApiResponse(responseCode = "204",
             description = "Class is updated by id")
-    public void update(@RequestParam Long id,
+    public void update(@PathVariable Long id,
                        @RequestBody Class classEntity) {
         classService.updateClass(id, classEntity);
     }
@@ -48,7 +48,7 @@ public class ClassController {
     }
 
     @GetMapping("getClassByName/{name}")
-    public ClassDto getClassByName(@PathVariable String name) {
+    public ClassDto getClassByName(@PathVariable("name") String name) {
         return classService.getClassByName(name);
 
     }

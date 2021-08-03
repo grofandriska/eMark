@@ -10,18 +10,9 @@ public class Teacher {
     private Long id;
     private String name;
     private String subject;
-    @OneToOne
+    @OneToOne(mappedBy = "teacher")
     private Class headmasterClass;
 
-    public Teacher(Long id, String name, String subject, Class headmasterClass) {
-        this.id = id;
-        this.name = name;
-        this.subject = subject;
-        this.headmasterClass = headmasterClass;
-    }
-
-    public Teacher() {
-    }
 
     public Long getId() {
         return id;

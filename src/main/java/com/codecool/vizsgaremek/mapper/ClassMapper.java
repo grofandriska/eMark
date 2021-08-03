@@ -1,29 +1,38 @@
 package com.codecool.vizsgaremek.mapper;
 
 import com.codecool.vizsgaremek.modell.Class;
+
 import com.codecool.vizsgaremek.modell.Teacher;
 import com.codecool.vizsgaremek.modell.dto.ClassDto;
-import com.codecool.vizsgaremek.modell.dto.TeacherDto;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.Synchronized;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClassMapper {
 
-    @Autowired
-    ModelMapper modelMapper;
-
-    public ClassMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public ClassMapper() {
     }
 
-    public ClassDto convertClassToDto(Class classEntity){
-        return modelMapper.map(classEntity, ClassDto.class);
+    @Synchronized
+    public ClassDto convertClassToDto(Class classEntity) {
+        ClassDto classDtoResponse = new ClassDto();
+        classDtoResponse.setClassName(classEntity.getName());
+        classDtoResponse.setHeadmasterId(classEntity.getTeacher().getId());
+        classDtoResponse.setId(classEntity.getId());
+        return classDtoResponse;
     }
 
-    public Class convertClassDtoToEntity(ClassDto classEntity){
-        return modelMapper.map(classEntity,Class.class);
+    @Synchronized
+    public Class convertClassDtoToEntity(ClassDto classEntity) {
+        Class classResponse = new Class();
+        classResponse.setId(classEntity.getId());
+        classResponse.setName(classEntity.getClassName());
+        Teacher teacher = new Teacher();
+        teacher.setId(classEntity.getHeadmasterId());
+        classResponse.setTeacher(teacher);
+        return classResponse;
+
     }
 
 }

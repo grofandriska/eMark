@@ -16,12 +16,12 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PutMapping("addStudent")
-    public void save(Student student) {
+    @PostMapping("addStudent")
+    public void save(@RequestBody StudentDto student) {
         studentService.save(student);
     }
 
-    @PutMapping("/updateById/{id}")
+    @PostMapping("/updateById/{id}")
     public void update(@PathVariable Long id, @RequestBody Student student) {
         studentService.updateStudent(id, student);
     }

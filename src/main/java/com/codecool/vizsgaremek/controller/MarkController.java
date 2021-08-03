@@ -18,7 +18,7 @@ public class MarkController {
     }
 
     @PutMapping("addMark")
-    public void add(Mark mark) {
+    public void add(@RequestBody MarkDto mark) {
         markService.add(mark);
     }
 
@@ -35,7 +35,6 @@ public class MarkController {
     @DeleteMapping("deleteMarkByID/{id}")
     public void delete(@PathVariable Long id) {
         markService.deleteMarkByID(id);
-
     }
 
     @PutMapping("updateMarkById/{id}")

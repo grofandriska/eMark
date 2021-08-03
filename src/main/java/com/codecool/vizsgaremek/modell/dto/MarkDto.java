@@ -11,10 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MarkDto {
 
-    private long id;
-    private int mark;
+    private Long markId;
+    private Integer mark;
+    //Osztály-módosítható
     private String subject;
+    //enum
     private String month;
-    private long studentId;
-    private long teacherId;
+    private Long studentId;
+    private Long teacherId;
+
 }

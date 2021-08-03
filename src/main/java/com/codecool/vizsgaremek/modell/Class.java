@@ -1,6 +1,9 @@
 package com.codecool.vizsgaremek.modell;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,16 +14,10 @@ public class Class {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "studentClass")
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
+    @OneToOne
+    private Teacher teacher;
 
-    public Class() {
-    }
-
-    public Class(Long id, String name, List<Student> students) {
-        this.id = id;
-        this.name = name;
-        this.students = students;
-    }
 
     public Long getId() {
         return id;
@@ -39,11 +36,19 @@ public class Class {
     }
 
     public List<Student> getStudents() {
-        return students;
+        return  students;
     }
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override

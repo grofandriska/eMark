@@ -2,26 +2,27 @@ package com.codecool.vizsgaremek.mapper;
 
 import com.codecool.vizsgaremek.modell.Teacher;
 import com.codecool.vizsgaremek.modell.dto.TeacherDto;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TeacherMapper {
-    @Autowired
-    ModelMapper modelMapper;
-
-    public TeacherMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public TeacherMapper() {
     }
 
     public TeacherDto teacherToDto(Teacher teacher){
-        return modelMapper.map(teacher,TeacherDto.class);
+        TeacherDto teacherDto = new TeacherDto();
+        teacherDto.setId(teacher.getId());
+        teacherDto.setName(teacher.getName());
+        teacherDto.setSubject(teacher.getSubject());
+        return teacherDto;
     }
 
     public Teacher teacherDtoToEntity(TeacherDto teacherDto){
-        return modelMapper.map(teacherDto,Teacher.class);
+        Teacher teacher = new Teacher();
+        teacher.setId(teacherDto.getId());
+        teacher.setSubject(teacherDto.getSubject());
+        teacher.setName(teacherDto.getName());
+        return teacher;
     }
-
 
 }

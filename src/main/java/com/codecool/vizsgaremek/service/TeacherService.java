@@ -23,9 +23,9 @@ public class TeacherService {
         this.teacherMapper = teacherMapper;
     }
 
-    public void saveTeacher(Teacher teacher) {
+    public void saveTeacher(TeacherDto teacher) {
         try {
-            teacherRepository.save(teacher);
+            teacherRepository.save(teacherMapper.teacherDtoToEntity(teacher));
 
         } catch (RuntimeException e) {
             Log.log.info("Teacher can not be added" + e.getMessage());
