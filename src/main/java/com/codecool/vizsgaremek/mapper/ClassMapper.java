@@ -15,20 +15,20 @@ public class ClassMapper {
     /*@Synchronized*/
     public ClassDto convertClassToDto(Class classEntity) {
         ClassDto classDtoResponse = new ClassDto();
-        classDtoResponse.setClassName(classEntity.getName());/*
-       classDtoResponse.setId(classEntity.getTeacher().getId());*/
+        classDtoResponse.setClassName(classEntity.getName());
         classDtoResponse.setId(classEntity.getId());
+        /*classDtoResponse.setHeadmasterId(classEntity.getTeacher().getId());*/
         return classDtoResponse;
     }
 
-   /* @Synchronized*/
+    /* @Synchronized*/
     public Class convertClassDtoToEntity(ClassDto classEntity) {
         Class classResponse = new Class();
         classResponse.setId(classEntity.getId());
         classResponse.setName(classEntity.getClassName());
         Teacher teacher = new Teacher();
         teacher.setId(classEntity.getId());
-        /*classResponse.setTeacher(teacher);*/
+      /*  classResponse.setTeacher(teacher);*/
         return classResponse;
 
     }

@@ -18,11 +18,11 @@ public class Class {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-   /* @Transient
-    @OneToOne(mappedBy = "classIdTeacher")
-    private Teacher teacher;*/
-   /* @Transient
+   /* @OneToOne(mappedBy = "classIdTeacher")
+    @JsonIgnore
+    private Teacher teacher;
     @OneToMany(mappedBy = "classID")
+    @JsonIgnore
     private List<Student> students ;*/
 
 }

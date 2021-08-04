@@ -14,6 +14,7 @@ public class TeacherMapper {
         teacherDto.setId(teacher.getId());
         teacherDto.setName(teacher.getName());
         teacherDto.setSubject(teacher.getSubject());
+        teacherDto.setClassId(teacher.getClassIdTeacher());
         return teacherDto;
     }
 
