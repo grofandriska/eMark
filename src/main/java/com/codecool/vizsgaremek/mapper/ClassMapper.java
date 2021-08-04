@@ -17,7 +17,8 @@ public class ClassMapper {
         ClassDto classDtoResponse = new ClassDto();
         classDtoResponse.setClassName(classEntity.getName());
         classDtoResponse.setId(classEntity.getId());
-        /*classDtoResponse.setHeadmasterId(classEntity.getTeacher().getId());*/
+       /*classDtoResponse.setHeadmasterId(classEntity.getTeacher().getId());*/
+
         return classDtoResponse;
     }
 
@@ -28,7 +29,7 @@ public class ClassMapper {
         classResponse.setName(classEntity.getClassName());
         Teacher teacher = new Teacher();
         teacher.setId(classEntity.getId());
-      /*  classResponse.setTeacher(teacher);*/
+       /* classResponse.setTeacher(teacher);*/
         return classResponse;
 
     }

@@ -13,7 +13,7 @@ public class ClassDto {
 
     private Long id;
     private String className;
-    private Long headmasterId;
-    private Long studentId;
+   /* private Long headmasterId;
+    private Long studentId;*/
 
 }
