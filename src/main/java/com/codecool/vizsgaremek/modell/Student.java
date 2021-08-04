@@ -1,38 +1,22 @@
 package com.codecool.vizsgaremek.modell;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String studentName;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Class studentClass;
+    @ManyToOne/*(cascade = CascadeType.ALL)*/
+    private Class classID;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public Class getStudentClass() {
-        return studentClass;
-    }
-
-    public void setStudentClass(Class studentClass) {
-        this.studentClass = studentClass;
-    }
 }

@@ -36,7 +36,7 @@ public class TeacherService {
     public void updateTeacherById(Long id, Teacher teacherUpdate) {
         teacherRepository.findById(id).map(teacher -> {
             teacher.setName(teacherUpdate.getName());
-            teacher.setHeadmasterClass(teacherUpdate.getHeadmasterClass());
+            teacher.setClassIdTeacher(teacherUpdate.getClassIdTeacher());
             teacher.setSubject(teacherUpdate.getSubject());
             return teacherRepository.save(teacher);
         });

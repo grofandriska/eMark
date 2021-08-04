@@ -50,7 +50,7 @@ public class StudentService {
         try {
             studentRepository.findById(id).map(student -> {
                 student.setStudentName(studentUpdate.getStudentName());
-                student.setStudentClass(studentUpdate.getStudentClass());
+                student.setClassID(studentUpdate.getClassID());
                 return studentRepository.save(student);
             });
         } catch (StudentException e) {

@@ -26,7 +26,7 @@ public class ClassService {
         this.classMapper = classMapper;
     }
 
-    @Transactional
+   /* @Transactional*/
     public void addClass(ClassDto newClass) {
         Class classE = classMapper.convertClassDtoToEntity(newClass);
         classRepository.save(classE);
