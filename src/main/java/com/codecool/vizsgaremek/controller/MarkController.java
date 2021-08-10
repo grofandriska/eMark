@@ -59,4 +59,10 @@ public class MarkController {
     public Double getStudentAverageBySubject(@PathVariable Long id, @PathVariable String subject) {
         return markService.getStudentAverageBySubject(id, subject);
     }
+
+    @Operation(summary = "Get average for student by id and subject and month")
+    @GetMapping("getAverage/{id}/{subject}/{month}")
+    public Double getStudentAverageBySubject(@PathVariable Long id, @PathVariable String subject, @PathVariable String month) {
+        return markService.getStudentAverageBySubjectAndMonth(id, subject, month);
+    }
 }

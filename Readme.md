@@ -66,4 +66,8 @@ Osztályzat frissítése id alapján JSON-objektummal /mark/updateMarkById/{id} 
 
 Átlag lekérése diák id alapján és tárgy alapján /mark/getAverage/{id}/{subject} (GET)
 
+Átlag lekérése diák id alapján és tárgy alapján adott hónapra /mark/getAverage/{id}/{subject}/{month} (GET)
+
+
+
 

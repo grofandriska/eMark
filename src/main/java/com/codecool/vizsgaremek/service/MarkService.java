@@ -106,4 +106,17 @@ public class MarkService {
         return sum / marks.size();
     }
 
+    public Double getStudentAverageBySubjectAndMonth(Long id, String subject, String month) {
+        List<Double> marks = new ArrayList<>();
+        double sum = 0;
+        List<Mark> result = markRepository.findAll();
+        for (Mark mark : result) {
+            if (mark.getStudent().getId().equals(id) && mark.getSubject().equals(subject) && mark.getMonth().equals(month)) {
+                marks.add(mark.getMark());
+                sum = sum + mark.getMark();
+            }
+        }
+        return sum / marks.size();
+    }
+
 }
