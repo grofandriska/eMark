@@ -23,7 +23,7 @@ public class TeacherController {
         teacherService.saveTeacher(teacher);
     }
 
-    @Operation(summary = "Get all class")
+    @Operation(summary = "Get all teacher")
     @GetMapping("getAllTeacher")
     public List<TeacherDto> getAllTeacher(){
         return teacherService.getAllTeacher();

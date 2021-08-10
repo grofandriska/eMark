@@ -18,7 +18,7 @@ public class MarkController {
         this.markService = markService;
     }
 
-    @Operation(summary = "Add a Mark")
+    @Operation(summary = "Add a mark")
     @PostMapping("addMark")
     public void add(@RequestBody MarkDto mark) {
         markService.add(mark);
