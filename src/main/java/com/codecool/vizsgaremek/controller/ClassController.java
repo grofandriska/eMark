@@ -30,7 +30,7 @@ public class ClassController {
         classService.deleteClass(id);
     }
 
-    @PutMapping("/updateClass")
+    @PutMapping("/updateClass/{id}")
     @Operation(summary = "Update a single class by id .")
     @ApiResponse(responseCode = "204",
             description = "Class is updated by id")

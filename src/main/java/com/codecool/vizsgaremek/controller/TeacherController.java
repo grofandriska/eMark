@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teachers")
+@RequestMapping("/teacher")
 public class TeacherController {
 
     TeacherService teacherService;
@@ -26,7 +26,7 @@ public class TeacherController {
         return teacherService.getAllTeacher();
     }
 
-    @GetMapping("updateTeacher/{id}")
+    @PutMapping("updateTeacher/{id}")
     public void updateTeacher(@PathVariable Long id, @RequestBody Teacher teacher){
         teacherService.updateTeacherById(id,teacher);
     }

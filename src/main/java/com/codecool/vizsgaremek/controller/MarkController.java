@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Mark")
+@RequestMapping("/mark")
 public class MarkController {
 
     MarkService markService;
@@ -17,7 +17,7 @@ public class MarkController {
         this.markService = markService;
     }
 
-    @PutMapping("addMark")
+    @PostMapping("addMark")
     public void add(@RequestBody MarkDto mark) {
         markService.add(mark);
     }
@@ -27,12 +27,12 @@ public class MarkController {
         return markService.getMarkById(id);
     }
 
-    @GetMapping("gatAllMark")
+    @GetMapping("getAllMark")
     public List<MarkDto> getMarkList() {
         return markService.getMarkList();
     }
 
-    @DeleteMapping("deleteMarkByID/{id}")
+    @DeleteMapping("deleteMarkById/{id}")
     public void delete(@PathVariable Long id) {
         markService.deleteMarkByID(id);
     }
@@ -42,12 +42,12 @@ public class MarkController {
         markService.update(id, mark);
     }
 
-    @GetMapping("getAvarage/{id}")
+    @GetMapping("getAverage/{id}")
     public Double getStudentAverage(@PathVariable Long id) {
         return markService.getStudentAverage(id);
     }
 
-    @GetMapping("getAvarage/{id}/{subject}")
+    @GetMapping("getAverage/{id}/{subject}")
     public Double getStudentAvarageBySubject(@PathVariable Long id, @PathVariable String subject) {
         return markService.getStudentAverageBySubject(id, subject);
     }
