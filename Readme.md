@@ -54,11 +54,11 @@ Osztályzat :
 
 Osztályzatok lekérése /mark/getAllMark (GET)
 
-Osztályzat hozzáadása /mark/addMark(POST)
+Osztályzat hozzáadása /mark/addMark(POST) "A tanár Subject és Mark subject meg kell hogy egyezzen"
 
 Osztályzat lekérése id alapján /mark/getMarkById/{id} (GET)
 
-Osztályzat törlése id alapján /mark/deleteMarkById/{id}
+Osztályzat törlése id alapján /mark/deleteMarkById/{id} 
 
 Osztályzat frissítése id alapján JSON-objektummal /mark/updateMarkById/{id} (PUT)
 

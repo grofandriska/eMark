@@ -32,13 +32,12 @@ public class TeacherService {
     }
 
     public void updateTeacherById(Long id, Teacher teacherUpdate) {
-        teacherRepository.findById(id).map(teacher -> {
-            teacher.setName(teacherUpdate.getName());
-            teacher.setSubject(teacherUpdate.getSubject());
-            teacher.setGender(teacherUpdate.getGender());
-            return teacherRepository.save(teacher);
-        });
-        throw new TeacherException(id);
+        Teacher teacher = teacherRepository.findById(id).get();
+        teacher.setName(teacherUpdate.getName());
+        teacher.setSubject(teacherUpdate.getSubject());
+        teacher.setGender(teacherUpdate.getGender());
+        teacherRepository.save(teacher);
+
     }
 
     public void deleteTeacherById(Long id) {

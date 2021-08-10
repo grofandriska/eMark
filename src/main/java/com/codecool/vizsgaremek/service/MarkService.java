@@ -69,16 +69,14 @@ public class MarkService {
     }
 
     public void update(Long id, Mark mark) {
-        markRepository.findById(id).map(mark1 -> {
-            mark1.setMark(mark.getMark());
-            mark1.setMonth(mark.getMonth());
-            mark1.setStudent(mark.getStudent());
-            mark1.setSubject(mark.getSubject());
-            mark1.setTeacher(mark.getTeacher());
+        Mark markUpdate = markRepository.findById(id).get();
+        markUpdate.setMark(mark.getMark());
+        markUpdate.setMonth(mark.getMonth());
+        markUpdate.setStudent(mark.getStudent());
+        markUpdate.setSubject(mark.getSubject());
+        markUpdate.setTeacher(mark.getTeacher());
+        markRepository.save(markUpdate);
 
-            return markRepository.save(mark1);
-        });
-        throw new MarkException(id);
     }
 
     public Double getStudentAverage(Long id) {

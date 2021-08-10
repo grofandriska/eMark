@@ -9,6 +9,7 @@ import com.codecool.vizsgaremek.repository.ClassRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,13 +77,10 @@ public class ClassService {
     }
 
     public void updateClass(Long id, Class update) {
-        classRepository.findById(id).map(classById -> {
-            classById.setName(update.getName());
-            classById.setName(update.getName());
-            return classRepository.save(classById);
-        });
-        Log.log.info("(!updateClass! something went wrong");
-        throw new ClassException(id);
+        Class classById = classRepository.findById(id).get();
+        classById.setName(update.getName());
+        classById.setName(update.getName());
+        classRepository.save(classById);
     }
 
 }
