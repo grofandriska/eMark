@@ -9,21 +9,21 @@ public class TeacherMapper {
     public TeacherMapper() {
     }
 
-    public TeacherDto teacherToDto(Teacher teacher){
+    public TeacherDto convertTeacherToDto(Teacher teacher){
         TeacherDto teacherDto = new TeacherDto();
         teacherDto.setId(teacher.getId());
         teacherDto.setName(teacher.getName());
         teacherDto.setSubject(teacher.getSubject());
-        teacherDto.setClassId(teacher.getClassIdTeacher());
+        teacherDto.setGender(teacher.getGender());
         return teacherDto;
     }
 
-    public Teacher teacherDtoToEntity(TeacherDto teacherDto){
+    public Teacher convertTeacherDtoToEntity(TeacherDto teacherDto){
         Teacher teacher = new Teacher();
         teacher.setId(teacherDto.getId());
         teacher.setSubject(teacherDto.getSubject());
         teacher.setName(teacherDto.getName());
-        teacher.setClassIdTeacher(teacherDto.getClassId());
+        teacher.setGender(teacherDto.getGender());
         return teacher;
     }
 

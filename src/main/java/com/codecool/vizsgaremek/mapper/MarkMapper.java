@@ -27,15 +27,11 @@ public class MarkMapper {
         markResponse.setId(mark.getMarkId());
         markResponse.setMark(mark.getMark());
         markResponse.setMonth(mark.getMonth());
-
         Student student = new Student();
         student.setId(mark.getStudentId());
-
         markResponse.setStudent(student);
-
         Teacher teacher = new Teacher();
         teacher.setId(mark.getTeacherId());
-
         markResponse.setTeacher(teacher);
         markResponse.setSubject(mark.getSubject());
         return markResponse;

@@ -17,7 +17,5 @@ public class Teacher {
     private Long id;
     private String name;
     private String subject;
-    @OneToOne
-    private Class classIdTeacher;
-
+    private String gender;
 }

@@ -4,6 +4,7 @@ import com.codecool.vizsgaremek.modell.Student;
 import com.codecool.vizsgaremek.modell.dto.StudentDto;
 import com.codecool.vizsgaremek.service.StudentService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RequestMapping("/students")
@@ -34,6 +35,16 @@ public class StudentController {
     @GetMapping
     public List<StudentDto> getAllStudent() {
         return studentService.getAll();
+    }
+
+    @GetMapping("/byClass/{id}")
+    public List<StudentDto> getStudentsByClass(@PathVariable Long id) {
+        return studentService.getStudentsByClassId(id);
+    }
+
+    @GetMapping("/byGenre/{gender}")
+    public List<StudentDto> getStudentsByClass(@PathVariable String gender) {
+        return studentService.getStudentsByGender(gender);
     }
 
 }

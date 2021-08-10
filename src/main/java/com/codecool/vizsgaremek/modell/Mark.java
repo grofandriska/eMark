@@ -14,13 +14,11 @@ public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int mark;
+    private double mark;
     private String subject;
     private String month;
     @OneToOne
     private Student student;
     @OneToOne
     private Teacher teacher;
-
-
 }

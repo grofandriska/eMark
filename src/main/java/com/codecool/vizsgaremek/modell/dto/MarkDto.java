@@ -12,10 +12,8 @@ import lombok.Setter;
 public class MarkDto {
 
     private Long markId;
-    private Integer mark;
-    //Osztály-módosítható
+    private double mark;
     private String subject;
-    //enum
     private String month;
     private Long studentId;
     private Long teacherId;

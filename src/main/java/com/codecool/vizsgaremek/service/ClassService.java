@@ -9,7 +9,6 @@ import com.codecool.vizsgaremek.repository.ClassRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,12 +25,10 @@ public class ClassService {
         this.classMapper = classMapper;
     }
 
-   /* @Transactional*/
+    @Transactional
     public void addClass(ClassDto newClass) {
-        Class classE = classMapper.convertClassDtoToEntity(newClass);
-        classRepository.save(classE);
-        log.info("Szuper");
-
+        Class classEntity = classMapper.convertClassDtoToEntity(newClass);
+        classRepository.save(classEntity);
     }
 
     public List<ClassDto> listAllClass() {
@@ -44,13 +41,11 @@ public class ClassService {
         ClassDto classResponse = new ClassDto();
         List<Class> classResponseList;
         classResponseList = classRepository.findAll();
-
         for (Class classEntity : classResponseList) {
             if (classEntity.getName().equals(className)) {
                 classResponse = classMapper.convertClassToDto(classEntity);
                 return classResponse;
             }
-
         }
         Log.log.info("(!getClassByName!)Something went wrong when looking for class by given name :" + className);
         return classResponse;
@@ -63,22 +58,24 @@ public class ClassService {
         for (Class aClass : classResponseList) {
             if (aClass.getId().equals(id)) {
                 classResponse = classMapper.convertClassToDto(aClass);
-                Log.log.info("(!GetClassByID!) Class Found ! id: " + id);
+                Log.log.info("Class Found! id: " + id);
                 return classResponse;
             }
         }
-        Log.log.info("(!GetClassByID! something went wrong");
+        Log.log.info("(!GetClassByID!) something went wrong when looking for id:" + id);
         throw new ClassException(id);
 
     }
 
-
     public void deleteClass(long id) {
-        classRepository.deleteById(id);
+        try {
+            classRepository.deleteById(id);
+        } catch (ClassException e) {
+            log.info(e.getMessage());
+        }
     }
 
     public void updateClass(Long id, Class update) {
-
         classRepository.findById(id).map(classById -> {
             classById.setName(update.getName());
             classById.setName(update.getName());

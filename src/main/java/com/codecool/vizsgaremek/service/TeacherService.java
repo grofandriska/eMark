@@ -25,43 +25,38 @@ public class TeacherService {
 
     public void saveTeacher(TeacherDto teacher) {
         try {
-            teacherRepository.save(teacherMapper.teacherDtoToEntity(teacher));
-
+            teacherRepository.save(teacherMapper.convertTeacherDtoToEntity(teacher));
         } catch (RuntimeException e) {
             Log.log.info("Teacher can not be added" + e.getMessage());
         }
-
     }
 
     public void updateTeacherById(Long id, Teacher teacherUpdate) {
         teacherRepository.findById(id).map(teacher -> {
             teacher.setName(teacherUpdate.getName());
-            teacher.setClassIdTeacher(teacherUpdate.getClassIdTeacher());
             teacher.setSubject(teacherUpdate.getSubject());
+            teacher.setGender(teacherUpdate.getGender());
             return teacherRepository.save(teacher);
         });
         throw new TeacherException(id);
-
     }
 
     public void deleteTeacherById(Long id) {
         try {
             teacherRepository.deleteById(id);
         } catch (TeacherException e) {
-            Log.log.info("Something went wrong when deleteing Teacher by id :" + id);
+            Log.log.info("Something went wrong when deleting Teacher by id :" + id);
             Log.log.info("See details :" + e);
             throw new TeacherException(id);
         }
-
     }
 
     public List<TeacherDto> getAllTeacher() {
         List<TeacherDto> teacherListResponse = new ArrayList<>();
         List<Teacher> teacherList = teacherRepository.findAll();
         for (Teacher teacher : teacherList) {
-            teacherListResponse.add(teacherMapper.teacherToDto(teacher));
+            teacherListResponse.add(teacherMapper.convertTeacherToDto(teacher));
         }
         return teacherListResponse;
     }
-
 }

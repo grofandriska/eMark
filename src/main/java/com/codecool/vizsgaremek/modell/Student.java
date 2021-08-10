@@ -16,7 +16,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String studentName;
-    @ManyToOne/*(cascade = CascadeType.ALL)*/
+    private String gender;
+    @ManyToOne
     private Class classID;
 
 }

@@ -41,4 +41,14 @@ public class MarkController {
     public void update(@PathVariable Long id, @RequestBody Mark mark) {
         markService.update(id, mark);
     }
+
+    @GetMapping("getAvarage/{id}")
+    public Double getStudentAverage(@PathVariable Long id) {
+        return markService.getStudentAverage(id);
+    }
+
+    @GetMapping("getAvarage/{id}/{subject}")
+    public Double getStudentAvarageBySubject(@PathVariable Long id, @PathVariable String subject) {
+        return markService.getStudentAverageBySubject(id, subject);
+    }
 }

@@ -16,6 +16,7 @@ public class StudentMapper {
         studentDto.setId(student.getId());
         studentDto.setStudentClassId(student.getClassID().getId());
         studentDto.setStudentName(student.getStudentName());
+        studentDto.setGender(student.getGender());
         return studentDto;
     }
 
@@ -23,6 +24,7 @@ public class StudentMapper {
         Student studentEntity = new Student();
         studentEntity.setId(student.getId());
         studentEntity.setStudentName(student.getStudentName());
+        studentEntity.setGender(student.getGender());
         Class classEntity = new Class();
         classEntity.setId(student.getStudentClassId());
         studentEntity.setClassID(classEntity);

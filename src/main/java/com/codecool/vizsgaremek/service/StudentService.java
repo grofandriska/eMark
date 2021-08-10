@@ -42,21 +42,43 @@ public class StudentService {
         } catch (StudentException e) {
             throw new StudentException(id);
         }
-
     }
 
-    ///TEST CATCH
     public void updateStudent(Long id, Student studentUpdate) {
         try {
             studentRepository.findById(id).map(student -> {
                 student.setStudentName(studentUpdate.getStudentName());
                 student.setClassID(studentUpdate.getClassID());
+                student.setGender(studentUpdate.getGender());
                 return studentRepository.save(student);
             });
         } catch (StudentException e) {
             System.out.println(e);
             throw new StudentException(id);
         }
+    }
 
+    public List<StudentDto> getStudentsByClassId(Long id) {
+        List<Student> list = studentRepository.findAll();
+        List<StudentDto> response = new ArrayList<>();
+        for (Student student : list) {
+            if (student.getClassID().getId().equals(id)) {
+                response.add(studentMapper.convertStudentToDto(student));
+            }
+        }
+        return response;
+    }
+
+    public List<StudentDto> getStudentsByGender(String gender) {
+        List<Student> list = studentRepository.findAll();
+        List<StudentDto> response = new ArrayList<>();
+        for (Student student : list) {
+            if (student.getGender().equals(gender)) {
+                response.add(studentMapper.convertStudentToDto(student));
+            }
+        }
+        return response;
     }
 }
+
+

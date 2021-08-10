@@ -14,5 +14,6 @@ public class StudentDto {
     private Long id;
     private String studentName;
     private Long studentClassId;
+    private String gender;
 
 }
