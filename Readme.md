@@ -4,6 +4,8 @@ Vizsga project leírás
 
 E-kéta alkalmazás . Tanárok, diákok, jegyek és osztályok tárolása H2-adatbázisban.
 
+------------------------------------------------------------------------------
+
 Osztály :
 
 Osztály létrehozása JSON-objektumon keresztül /class/addClass (POST)
@@ -18,6 +20,8 @@ Osztály lekérése név alapján /class/getClassByName/{name} (GET)
 
 Osztály lekérése id alapján /class/getClassById/{id} (GET)
 
+------------------------------------------------------------------------------
+
 Tanár :
 
 Tanár hozzáadása JSON-objektumon keresztül /teacher/addTeacher (Post)
@@ -27,6 +31,8 @@ Tanárok lekérése /teacher/getAllTeacher (GET)
 Tanár frissítése id alapján /teacher/updateTeacher/{id} (PUT)
 
 Tanár törlése /teacher/deleteTeacher/{id} "csak akkor lehet ha már nincs függősége jegyekre" (DELETE)
+
+------------------------------------------------------------------------------
 
 Diák :
 
@@ -41,6 +47,8 @@ Diákok lekérése /student/getAllStudent (GET)
 Diákok lekérése osztály id alapján /student/byClass/{id} (GET)
 
 Diákok lekérése nem alapján /student/byGenre/{gender} (GET)
+
+------------------------------------------------------------------------------
 
 Osztályzat :
 
