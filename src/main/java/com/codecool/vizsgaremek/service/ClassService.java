@@ -1,6 +1,7 @@
 package com.codecool.vizsgaremek.service;
 
 import com.codecool.vizsgaremek.exception.ClassException;
+import com.codecool.vizsgaremek.exception.MarkException;
 import com.codecool.vizsgaremek.log.Log;
 import com.codecool.vizsgaremek.mapper.ClassMapper;
 import com.codecool.vizsgaremek.modell.Class;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class ClassService {
 
     ClassRepository classRepository;
@@ -72,15 +72,18 @@ public class ClassService {
         try {
             classRepository.deleteById(id);
         } catch (ClassException e) {
-            log.info(e.getMessage());
+            Log.log.info(e.getMessage());
         }
     }
 
+    //fix
     public void updateClass(Long id, Class update) {
-        Class classById = classRepository.findById(id).get();
-        classById.setName(update.getName());
-        classById.setName(update.getName());
-        classRepository.save(classById);
+        classRepository.findById(id).map(classE -> {
+           classE.setId(update.getId());
+           classE.setName(update.getName());
+            return classRepository.save(classE);
+        });
+
     }
 
 }

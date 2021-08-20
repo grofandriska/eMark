@@ -47,8 +47,8 @@ public class StudentService {
     public void updateStudent(Long id, Student studentUpdate) {
         try {
             studentRepository.findById(id).map(student -> {
+                student.getClassID().setId((studentUpdate.getClassID().getId()));
                 student.setStudentName(studentUpdate.getStudentName());
-                student.setClassID(studentUpdate.getClassID());
                 student.setGender(studentUpdate.getGender());
                 return studentRepository.save(student);
             });

@@ -12,24 +12,22 @@ public class StudentMapper {
     }
 
     public StudentDto convertStudentToDto(Student student) {
-        StudentDto studentDto = new StudentDto();
-        studentDto.setId(student.getId());
-        studentDto.setStudentClassId(student.getClassID().getId());
-        studentDto.setStudentName(student.getStudentName());
-        studentDto.setGender(student.getGender());
-        return studentDto;
+        StudentDto result = new StudentDto();
+        result.setId(student.getId());
+        result.setStudentClassId(student.getClassID().getId());
+        result.setStudentName(student.getStudentName());
+        result.setGender(student.getGender());
+        return result;
     }
 
     public Student convertStudentDtoToEntity(StudentDto student) {
-        Student studentEntity = new Student();
-        studentEntity.setId(student.getId());
-        studentEntity.setStudentName(student.getStudentName());
-        studentEntity.setGender(student.getGender());
         Class classEntity = new Class();
         classEntity.setId(student.getStudentClassId());
-        studentEntity.setClassID(classEntity);
-        return studentEntity;
+        Student result = new Student();
+        result.setId(student.getId());
+        result.setClassID(classEntity);
+        result.setStudentName(student.getStudentName());
+        result.setGender(student.getGender());
+        return result;
     }
-
-
 }

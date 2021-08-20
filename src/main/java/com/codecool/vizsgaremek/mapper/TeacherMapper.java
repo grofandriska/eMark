@@ -9,22 +9,22 @@ public class TeacherMapper {
     public TeacherMapper() {
     }
 
-    public TeacherDto convertTeacherToDto(Teacher teacher){
-        TeacherDto teacherDto = new TeacherDto();
-        teacherDto.setId(teacher.getId());
-        teacherDto.setName(teacher.getName());
-        teacherDto.setSubject(teacher.getSubject());
-        teacherDto.setGender(teacher.getGender());
-        return teacherDto;
+    public TeacherDto convertTeacherToDto(Teacher param){
+        TeacherDto result = new TeacherDto();
+        result.setId(param.getId());
+        result.setName(param.getName());
+        result.setSubject(param.getSubject());
+        result.setGender(param.getGender());
+        return result;
     }
 
-    public Teacher convertTeacherDtoToEntity(TeacherDto teacherDto){
-        Teacher teacher = new Teacher();
-        teacher.setId(teacherDto.getId());
-        teacher.setSubject(teacherDto.getSubject());
-        teacher.setName(teacherDto.getName());
-        teacher.setGender(teacherDto.getGender());
-        return teacher;
+    public Teacher convertTeacherDtoToEntity(TeacherDto param){
+        Teacher result = new Teacher();
+        result.setId(param.getId());
+        result.setSubject(param.getSubject());
+        result.setName(param.getName());
+        result.setGender(param.getGender());
+        return result;
     }
 
 }

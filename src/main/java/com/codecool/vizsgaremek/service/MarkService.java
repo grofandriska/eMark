@@ -69,17 +69,20 @@ public class MarkService {
     }
 
     public void update(Long id, Mark mark) {
-        Mark markUpdate = markRepository.findById(id).get();
-        markUpdate.setMark(mark.getMark());
-        markUpdate.setMonth(mark.getMonth());
-        markUpdate.setStudent(mark.getStudent());
-        markUpdate.setSubject(mark.getSubject());
-        markUpdate.setTeacher(mark.getTeacher());
-        markRepository.save(markUpdate);
+        markRepository.findById(id).map(mark1 -> {
+            mark1.setMark(mark.getMark());
+            mark1.setMonth(mark.getMonth());
+            mark1.setStudent(mark.getStudent());
+            mark1.setSubject(mark.getSubject());
+            mark1.setTeacher(mark.getTeacher());
+
+            return markRepository.save(mark1);
+        });
+        throw new MarkException(id);
 
     }
 
-    public Double getStudentAverage(Long id) {
+    public double getStudentAverage(Long id) {
         List<Double> marks = new ArrayList<>();
         double sum = 0;
         List<Mark> temp = markRepository.findAll();
@@ -93,7 +96,7 @@ public class MarkService {
 
     }
 
-    public Double getStudentAverageBySubject(Long id, String subject) {
+    public double getStudentAverageBySubject(Long id, String subject) {
         List<Double> marks = new ArrayList<>();
         double sum = 0;
         List<Mark> result = markRepository.findAll();
@@ -106,7 +109,7 @@ public class MarkService {
         return sum / marks.size();
     }
 
-    public Double getStudentAverageBySubjectAndMonth(Long id, String subject, String month) {
+    public double getStudentAverageBySubjectAndMonth(Long id, String subject, String month) {
         List<Double> marks = new ArrayList<>();
         double sum = 0;
         List<Mark> result = markRepository.findAll();

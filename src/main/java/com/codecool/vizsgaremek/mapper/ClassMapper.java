@@ -12,19 +12,17 @@ public class ClassMapper {
     public ClassMapper() {
     }
 
-    public ClassDto convertClassToDto(Class classEntity) {
-        ClassDto classDtoResponse = new ClassDto();
-        classDtoResponse.setId(classEntity.getId());
-        classDtoResponse.setClassName(classEntity.getName());
-        return classDtoResponse;
+    public ClassDto convertClassToDto(Class param) {
+        ClassDto result = new ClassDto();
+        result.setId(param.getId());
+        result.setClassName(param.getName());
+        return result;
     }
 
-    public Class convertClassDtoToEntity(ClassDto classEntity) {
-        Class classResponse = new Class();
-        classResponse.setId(classEntity.getId());
-        classResponse.setName(classEntity.getClassName());
-        Teacher teacher = new Teacher();
-        teacher.setId(classEntity.getId());
-        return classResponse;
+    public Class convertClassDtoToEntity(ClassDto param) {
+        Class result = new Class();
+        result.setId(param.getId());
+        result.setName(param.getClassName());
+        return result;
     }
 }
