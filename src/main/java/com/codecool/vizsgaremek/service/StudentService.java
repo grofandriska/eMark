@@ -5,12 +5,14 @@ import com.codecool.vizsgaremek.mapper.StudentMapper;
 import com.codecool.vizsgaremek.modell.Student;
 import com.codecool.vizsgaremek.modell.dto.StudentDto;
 import com.codecool.vizsgaremek.repository.StudentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class StudentService {
 
     StudentRepository studentRepository;
@@ -47,7 +49,7 @@ public class StudentService {
     public void updateStudent(Long id, Student studentUpdate) {
         try {
             studentRepository.findById(id).map(student -> {
-                student.getClassID().setId((studentUpdate.getClassID().getId()));
+                student.setClassName(studentUpdate.getClassName());
                 student.setStudentName(studentUpdate.getStudentName());
                 student.setGender(studentUpdate.getGender());
                 return studentRepository.save(student);
@@ -62,8 +64,9 @@ public class StudentService {
         List<Student> list = studentRepository.findAll();
         List<StudentDto> response = new ArrayList<>();
         for (Student student : list) {
-            if (student.getClassID().getId().equals(id)) {
+            if (student.getClassName().getId().equals(id)) {
                 response.add(studentMapper.convertStudentToDto(student));
+                log.info(student.getStudentName());
             }
         }
         return response;

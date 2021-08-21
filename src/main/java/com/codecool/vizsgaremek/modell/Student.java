@@ -15,9 +15,8 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    private Class className;
     private String studentName;
     private String gender;
-    @ManyToOne
-    private Class classID;
-
 }

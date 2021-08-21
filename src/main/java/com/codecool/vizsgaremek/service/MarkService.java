@@ -1,25 +1,24 @@
 package com.codecool.vizsgaremek.service;
 
 import com.codecool.vizsgaremek.exception.MarkException;
-import com.codecool.vizsgaremek.log.Log;
 import com.codecool.vizsgaremek.mapper.MarkMapper;
 import com.codecool.vizsgaremek.modell.Mark;
 import com.codecool.vizsgaremek.modell.Teacher;
 import com.codecool.vizsgaremek.modell.dto.MarkDto;
 import com.codecool.vizsgaremek.repository.MarkRepository;
 import com.codecool.vizsgaremek.repository.TeacherRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class MarkService {
 
     MarkRepository markRepository;
-
     TeacherRepository teacherRepository;
-
     MarkMapper markMapper;
 
     public MarkService(MarkRepository markRepository, TeacherRepository teacherRepository, MarkMapper markMapper) {
@@ -42,10 +41,10 @@ public class MarkService {
         MarkDto responseMark = new MarkDto();
         try {
             responseMark = markMapper.convertMarkToDto(markRepository.getById(id));
-            Log.log.info("Mark found by :" + id);
+            log.info("Mark found by :" + id);
             return responseMark;
         } catch (MarkException exception) {
-            Log.log.info("Something went wrong when looking for Mark by ID :" + id + " see Details" + exception.getMessage());
+            log.info("Something went wrong when looking for Mark by ID :" + id + " see Details" + exception.getMessage());
         }
         return responseMark;
     }
@@ -63,7 +62,7 @@ public class MarkService {
         try {
             markRepository.deleteById(id);
         } catch (MarkException e) {
-            Log.log.info("Something went wrong when looking for Mark by ID! see Details" + e.getMessage());
+            log.info("Something went wrong when looking for Mark_id :" + id + "! see Details" + e.getMessage());
         }
 
     }

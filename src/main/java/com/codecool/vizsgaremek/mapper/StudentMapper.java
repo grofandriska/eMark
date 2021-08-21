@@ -14,7 +14,7 @@ public class StudentMapper {
     public StudentDto convertStudentToDto(Student student) {
         StudentDto result = new StudentDto();
         result.setId(student.getId());
-        result.setStudentClassId(student.getClassID().getId());
+        result.setStudentClassId(student.getClassName().getId());
         result.setStudentName(student.getStudentName());
         result.setGender(student.getGender());
         return result;
@@ -23,9 +23,11 @@ public class StudentMapper {
     public Student convertStudentDtoToEntity(StudentDto student) {
         Class classEntity = new Class();
         classEntity.setId(student.getStudentClassId());
+
         Student result = new Student();
+
         result.setId(student.getId());
-        result.setClassID(classEntity);
+        result.setClassName(classEntity);
         result.setStudentName(student.getStudentName());
         result.setGender(student.getGender());
         return result;
