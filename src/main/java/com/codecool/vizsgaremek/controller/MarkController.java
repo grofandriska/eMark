@@ -44,8 +44,8 @@ public class MarkController {
     }
 
     @PutMapping("update/{id}")
-    public void update(@PathVariable Long id, @RequestBody Mark mark) {
-        markService.update(id, mark);
+    public Mark update(@PathVariable Long id, @RequestBody Mark mark) {
+        return markService.update(id, mark);
     }
 
     @GetMapping("get/{id}/{subject}")

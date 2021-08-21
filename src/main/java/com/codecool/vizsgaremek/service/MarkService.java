@@ -39,7 +39,7 @@ public class MarkService {
     }
 
     public Mark getMarkById(Long id) {
-        Mark responseMark = new Mark();
+       /* Mark responseMark = new Mark();
         try {
             responseMark = markRepository.findById(id).get();
             log.info("Mark found by :" + id);
@@ -47,8 +47,8 @@ public class MarkService {
 
         } catch (MarkException exception) {
             log.info("Something went wrong when looking for Mark by ID :" + id + " see Details" + exception.getMessage());
-        }
-        return responseMark;
+        }*/
+        return markRepository.findById(id).get();
     }
 
     public List<Mark> getMarkList() {
@@ -69,7 +69,7 @@ public class MarkService {
 
     }
 
-    public void update(Long id, Mark mark) {
+    public Mark update(Long id, Mark mark) {
         markRepository.findById(id).map(mark1 -> {
             mark1.setMark(mark.getMark());
             mark1.setMonth(mark.getMonth());

@@ -86,48 +86,65 @@ public class MarkTest {
         testRestTemplate.postForObject("http://localhost:" + port + "/teacher" + "/add", testTeacher, Teacher.class);
 
         Mark mark = new Mark(4L, 3.0, "JAVA", "June", studentTest, testTeacher);
-
-
-        Mark result = testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
-
-        assertEquals(result.getId(), mark.getId());
+        testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
+        Mark temp = testRestTemplate.getForObject(baseUrl + "/getMark/" + mark.getId(), Mark.class);
+        assertEquals(temp.getId(), temp.getId());
 
     }
 
     @Test
     public void update() {
+        Class testClass = new Class(1L, "1.A");
+        testRestTemplate.postForObject("http://localhost:" + port + "/class/add", testClass, Class.class);
+
+        Student studentTest = new Student(1L, testClass, "Kis Géza", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/student" + "/add", studentTest, Student.class);
+
         Teacher testTeacher = new Teacher(1L, "Erős Pista", "JAVA", "Male");
-        testTeacher = testRestTemplate.postForObject(baseUrl + "/add", testTeacher, Teacher.class);
-        testTeacher.setName("Updated name");
-        testRestTemplate.put(baseUrl + "/update/" + testTeacher.getId(), testTeacher);
-        Class updatedClass = testRestTemplate.getForObject(baseUrl + "/" + testTeacher.getId(), Class.class);
-        assertEquals("Updated name", updatedClass.getName());
+        testRestTemplate.postForObject("http://localhost:" + port + "/teacher" + "/add", testTeacher, Teacher.class);
+
+        Mark mark = new Mark(null, 3.0, "JAVA", "June", studentTest, testTeacher);
+        mark = testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
+
+        mark.setMonth("December");
+        testRestTemplate.put(baseUrl + "/update/" + mark.getId(), mark);
+
+        Mark temp = testRestTemplate.getForObject(baseUrl + "/getMark/" + mark.getId(), Mark.class);
+        assertEquals("December", temp.getMonth());
     }
 
     @Test
     public void delete() {
-        Teacher testTeacher1 = new Teacher(1L, "Erős Pista", "JAVA", "Male");
-        Teacher testTeacher2 = new Teacher(2L, "Erős Béla", "SQL", "Male");
-        Teacher testTeacher3 = new Teacher(3L, "Erős Géza", "SPRING", "Male");
+        Class testClass = new Class(1L, "1.A");
+        testRestTemplate.postForObject("http://localhost:" + port + "/class/add", testClass, Class.class);
+        Student studentTest = new Student(1L, testClass, "Kis Géza", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/student" + "/add", studentTest, Student.class);
+        Teacher testTeacher = new Teacher(1L, "Erős Pista", "JAVA", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/teacher" + "/add", testTeacher, Teacher.class);
 
-        List<Teacher> testTeachers = new ArrayList<>();
+        Mark mark = new Mark(null, 3.0, "JAVA", "June", studentTest, testTeacher);
+        mark = testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
+        Mark mark2 = new Mark(null, 3.0, "JAVA", "June", studentTest, testTeacher);
+        mark = testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
 
-        testTeachers.add(testTeacher1);
-        testTeachers.add(testTeacher2);
-        testTeachers.add(testTeacher3);
 
-        testTeachers.forEach(testTeacher -> testTeacher.setId(testRestTemplate.postForObject(baseUrl + "/add", testTeacher, Teacher.class).getId())
+        List<Mark> markList = new ArrayList<>();
+
+        markList.add(mark);
+        markList.add(mark2);
+
+        markList.forEach(markX -> markX.setId(testRestTemplate.postForObject(baseUrl + "/add", markX, Mark.class).getId())
         );
 
-        testRestTemplate.delete(baseUrl + "/delete/" + testTeacher2.getId());
-        testTeachers.remove(testTeacher2);
+        testRestTemplate.delete(baseUrl + "/delete/" + mark2.getId());
+        markList.remove(mark2);
 
-        List<Teacher> remainingTeachers = List.of(testRestTemplate.getForObject(baseUrl + "/getAll", Teacher[].class));
+        List<Mark> remainingMarks = List.of(testRestTemplate.getForObject(baseUrl + "/getAll", Mark[].class));
 
-        assertEquals(testTeachers.size(), remainingTeachers.size());
+        assertEquals(markList.size(), remainingMarks.size());
 
-        for (int i = 0; i < testTeachers.size(); i++) {
-            assertEquals(testTeachers.get(i).getName(), remainingTeachers.get(i).getName());
+        for (int i = 0; i < markList.size(); i++) {
+            assertEquals(markList.get(i).getMark(), remainingMarks.get(i).getMark());
         }
     }
 }
