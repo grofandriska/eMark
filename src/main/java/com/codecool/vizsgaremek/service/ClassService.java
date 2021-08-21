@@ -26,16 +26,12 @@ public class ClassService {
         this.classMapper = classMapper;
     }
 
-    @Transactional
-    public void addClass(ClassDto newClass) {
-        Class classEntity = classMapper.convertClassDtoToEntity(newClass);
-        classRepository.save(classEntity);
+    public Class addClass(Class newClass) {
+        return classRepository.save(newClass);
     }
 
-    public List<ClassDto> listAllClass() {
-        List<Class> classList = classRepository.findAll();
-        return classList.stream().map(aClass ->
-                classMapper.convertClassToDto(aClass)).collect(Collectors.toList());
+    public List<Class> listAllClass() {
+        return classRepository.findAll();
     }
 
     public ClassDto getClassByName(String className) {
@@ -52,13 +48,13 @@ public class ClassService {
         return classResponse;
     }
 
-    public ClassDto getClassById(Long id) {
-        ClassDto classResponse;
+    public Class getClassById(Long id) {
+        Class classResponse;
         List<Class> classResponseList;
         classResponseList = classRepository.findAll();
         for (Class aClass : classResponseList) {
             if (aClass.getId().equals(id)) {
-                classResponse = classMapper.convertClassToDto(aClass);
+                classResponse = aClass;
                 log.info("Class Found! id: " + id);
                 return classResponse;
             }

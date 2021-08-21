@@ -18,13 +18,13 @@ public class ClassController {
     }
 
     @GetMapping("getAllClass")
-    public List<ClassDto> listAll() {
+    public List<Class> listAll() {
         return classService.listAllClass();
     }
 
-    @PostMapping("addClass")
-    public void add(@RequestBody ClassDto classEntity) {
-        classService.addClass(classEntity);
+    @PostMapping("/add")
+    public Class add(@RequestBody Class classEntity)  {
+        return classService.addClass(classEntity);
     }
 
     @DeleteMapping("deleteClass/{id}")
@@ -33,7 +33,7 @@ public class ClassController {
     }
 
     @GetMapping("getClassById/{id}")
-    public ClassDto getClassById (@PathVariable Long id) {
+    public Class getClassById (@PathVariable Long id) {
         return classService.getClassById(id);
     }
 
