@@ -1,11 +1,9 @@
 package com.codecool.vizsgaremek.service;
 
-import com.codecool.vizsgaremek.exception.ClassException;
+
 import com.codecool.vizsgaremek.exception.TeacherException;
 import com.codecool.vizsgaremek.mapper.TeacherMapper;
-import com.codecool.vizsgaremek.modell.Class;
 import com.codecool.vizsgaremek.modell.Teacher;
-import com.codecool.vizsgaremek.modell.dto.TeacherDto;
 import com.codecool.vizsgaremek.repository.TeacherRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,10 +24,10 @@ public class TeacherService {
         this.teacherMapper = teacherMapper;
     }
 
-    public Teacher saveTeacher(TeacherDto teacher) {
+    public Teacher saveTeacher(Teacher teacher) {
         Teacher teacherSave = new Teacher();
         try {
-            teacherSave = teacherRepository.save(teacherMapper.convertTeacherDtoToEntity(teacher));
+            teacherSave = teacherRepository.save(teacher);
         } catch (RuntimeException e) {
             log.info("Teacher can not be added" + e.getMessage());
         }

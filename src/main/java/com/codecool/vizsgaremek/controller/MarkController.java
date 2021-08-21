@@ -19,13 +19,13 @@ public class MarkController {
     }
 
     @GetMapping("getAll")
-    public List<MarkDto> getMarkList() {
+    public List<Mark> getMarkList() {
         return markService.getMarkList();
     }
 
     @PostMapping("add")
-    public void add(@RequestBody MarkDto mark) {
-        markService.add(mark);
+    public Mark add(@RequestBody Mark mark) {
+       return markService.add(mark);
     }
 
     @GetMapping("average/{id}")
@@ -34,7 +34,7 @@ public class MarkController {
     }
 
     @GetMapping("getMark/{id}")
-    public MarkDto getMarkById(@PathVariable Long id) {
+    public Mark getMarkById(@PathVariable Long id) {
         return markService.getMarkById(id);
     }
 

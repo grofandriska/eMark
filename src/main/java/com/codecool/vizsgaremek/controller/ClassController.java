@@ -3,8 +3,10 @@ package com.codecool.vizsgaremek.controller;
 import com.codecool.vizsgaremek.modell.Class;
 import com.codecool.vizsgaremek.modell.dto.ClassDto;
 import com.codecool.vizsgaremek.service.ClassService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +25,13 @@ public class ClassController {
     }
 
     @PostMapping("/add")
-    public Class add(@RequestBody Class classEntity)  {
+    public Class add(@Valid @RequestBody Class classEntity, BindingResult bindingResult)  {
+        if (bindingResult.hasErrors()) {
+            bindingResult
+                    .getAllErrors()
+                    .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
+            return null;
+        }
         return classService.addClass(classEntity);
     }
 
@@ -44,7 +52,14 @@ public class ClassController {
 
     @PutMapping("/updateClass/{id}")
     public void update(@PathVariable Long id,
-                       @RequestBody Class classEntity) {
+                       @Valid @RequestBody Class classEntity,
+                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult
+                    .getAllErrors()
+                    .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
+            return;
+        }
         classService.updateClass(id, classEntity);
     }
 }

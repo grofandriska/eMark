@@ -27,33 +27,35 @@ public class MarkService {
         this.markMapper = markMapper;
     }
 
-    public void add(MarkDto mark) {
-        Long id = mark.getTeacherId();
+    public Mark add(Mark mark) {
+        Long id = mark.getTeacher().getId();
         Teacher teacher = teacherRepository.findById(id).get();
         if (teacher.getSubject().equals(mark.getSubject())) {
-            markRepository.save(markMapper.convertMarkDtoToEntity(mark));
+            markRepository.save(mark);
         } else {
             throw new RuntimeException("Please check your saving data ");
         }
+        return mark;
     }
 
-    public MarkDto getMarkById(Long id) {
-        MarkDto responseMark = new MarkDto();
+    public Mark getMarkById(Long id) {
+        Mark responseMark = new Mark();
         try {
-            responseMark = markMapper.convertMarkToDto(markRepository.getById(id));
+            responseMark = markRepository.getById(id);
             log.info("Mark found by :" + id);
             return responseMark;
+
         } catch (MarkException exception) {
             log.info("Something went wrong when looking for Mark by ID :" + id + " see Details" + exception.getMessage());
         }
         return responseMark;
     }
 
-    public List<MarkDto> getMarkList() {
+    public List<Mark> getMarkList() {
         List<Mark> marks = markRepository.findAll();
-        List<MarkDto> marksResponse = new ArrayList<>();
+        List<Mark> marksResponse = new ArrayList<>();
         for (Mark mark : marks) {
-            marksResponse.add(markMapper.convertMarkToDto(mark));
+            marksResponse.add(mark);
         }
         return marksResponse;
     }

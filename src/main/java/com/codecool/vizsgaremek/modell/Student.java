@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -17,6 +18,8 @@ public class Student {
     private Long id;
     @ManyToOne
     private Class className;
+    @NotBlank(message = "Full name is mandatory")
     private String studentName;
+    @NotBlank(message = "Gender name is mandatory")
     private String gender;
 }

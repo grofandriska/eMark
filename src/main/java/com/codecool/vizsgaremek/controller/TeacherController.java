@@ -20,7 +20,7 @@ public class TeacherController {
 
 
     @PostMapping("add")
-    public Teacher saveTeacher(@RequestBody TeacherDto teacher) {
+    public Teacher saveTeacher(@RequestBody Teacher teacher) {
         return teacherService.saveTeacher(teacher);
     }
 

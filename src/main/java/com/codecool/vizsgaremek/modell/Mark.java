@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -16,7 +17,9 @@ public class Mark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double mark;
+    @NotBlank(message = "Subject name is mandatory")
     private String subject;
+    @NotBlank(message = "Month name is mandatory")
     private String month;
     @OneToOne
     private Student student;
