@@ -1,8 +1,10 @@
 package com.codecool.vizsgaremek.service;
 
 import com.codecool.vizsgaremek.exception.StudentException;
+import com.codecool.vizsgaremek.exception.TeacherException;
 import com.codecool.vizsgaremek.mapper.StudentMapper;
 import com.codecool.vizsgaremek.modell.Student;
+import com.codecool.vizsgaremek.modell.Teacher;
 import com.codecool.vizsgaremek.modell.dto.StudentDto;
 import com.codecool.vizsgaremek.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,18 +26,29 @@ public class StudentService {
         this.studentMapper = studentMapper;
     }
 
-    public void save(StudentDto student) {
-        studentRepository.save(studentMapper.convertStudentDtoToEntity(student));
+    public Student save(Student student) {
+        return studentRepository.save(student);
     }
 
-    public List<StudentDto> getAll() {
+    public List<Student> getAll() {
         List<Student> studentList = studentRepository.findAll();
-        List<StudentDto> studentListResponse = new ArrayList<>();
-        for (Student student : studentList) {
-            studentListResponse.add(studentMapper.convertStudentToDto(student));
+        return studentList;
+    }
 
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).get();
+        /*Student studentResponse;
+        List<Student> studentResponseList;
+        studentResponseList = studentRepository.findAll();
+        for (Student student : studentResponseList) {
+            if (student.getId().equals(id)) {
+                studentResponse = student;
+                log.info("Student found! id: " + id);
+                return studentResponse;
+            }
         }
-        return studentListResponse;
+        log.info("(!GetStudentByID!) something went wrong when looking for id:" + id);
+        throw new StudentException(id);*/
     }
 
     public void deleteStudent(Long id) {
@@ -60,24 +73,24 @@ public class StudentService {
         }
     }
 
-    public List<StudentDto> getStudentsByClassId(Long id) {
+    public List<Student> getStudentsByClassId(Long id) {
         List<Student> list = studentRepository.findAll();
-        List<StudentDto> response = new ArrayList<>();
+        List<Student> response = new ArrayList<>();
         for (Student student : list) {
             if (student.getClassName().getId().equals(id)) {
-                response.add(studentMapper.convertStudentToDto(student));
+                response.add(student);
                 log.info(student.getStudentName());
             }
         }
         return response;
     }
 
-    public List<StudentDto> getStudentsByGender(String gender) {
+    public List<Student> getStudentsByGender(String gender) {
         List<Student> list = studentRepository.findAll();
-        List<StudentDto> response = new ArrayList<>();
+        List<Student> response = new ArrayList<>();
         for (Student student : list) {
             if (student.getGender().equals(gender)) {
-                response.add(studentMapper.convertStudentToDto(student));
+                response.add(student);
             }
         }
         return response;

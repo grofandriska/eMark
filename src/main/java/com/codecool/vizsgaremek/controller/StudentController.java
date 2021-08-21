@@ -1,7 +1,6 @@
 package com.codecool.vizsgaremek.controller;
 
 import com.codecool.vizsgaremek.modell.Student;
-import com.codecool.vizsgaremek.modell.dto.StudentDto;
 import com.codecool.vizsgaremek.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +17,13 @@ public class StudentController {
     }
 
     @GetMapping("getAll")
-    public List<StudentDto> getAllStudent() {
+    public List<Student> getAllStudent() {
         return studentService.getAll();
     }
 
     @PostMapping("add")
-    public void save(@RequestBody StudentDto student) {
-        studentService.save(student);
+    public Student save(@RequestBody Student student) {
+        return studentService.save(student);
     }
 
     @DeleteMapping("delete/{id}")
@@ -33,12 +32,12 @@ public class StudentController {
     }
 
     @GetMapping("/class/{id}")
-    public List<StudentDto> getStudentsByClass(@PathVariable Long id) {
+    public List<Student> getStudentsByClass(@PathVariable Long id) {
         return studentService.getStudentsByClassId(id);
     }
 
     @GetMapping("/gender/{gender}")
-    public List<StudentDto> getStudentsGender(@PathVariable String gender) {
+    public List<Student> getStudentsGender(@PathVariable String gender) {
         return studentService.getStudentsByGender(gender);
     }
 
@@ -47,4 +46,8 @@ public class StudentController {
         studentService.updateStudent(id, student);
     }
 
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable Long id) {
+        return studentService.getStudentById(id);
+    }
 }

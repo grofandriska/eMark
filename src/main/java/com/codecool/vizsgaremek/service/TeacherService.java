@@ -1,7 +1,9 @@
 package com.codecool.vizsgaremek.service;
 
+import com.codecool.vizsgaremek.exception.ClassException;
 import com.codecool.vizsgaremek.exception.TeacherException;
 import com.codecool.vizsgaremek.mapper.TeacherMapper;
+import com.codecool.vizsgaremek.modell.Class;
 import com.codecool.vizsgaremek.modell.Teacher;
 import com.codecool.vizsgaremek.modell.dto.TeacherDto;
 import com.codecool.vizsgaremek.repository.TeacherRepository;
@@ -24,12 +26,14 @@ public class TeacherService {
         this.teacherMapper = teacherMapper;
     }
 
-    public void saveTeacher(TeacherDto teacher) {
+    public Teacher saveTeacher(TeacherDto teacher) {
+        Teacher teacherSave = new Teacher();
         try {
-            teacherRepository.save(teacherMapper.convertTeacherDtoToEntity(teacher));
+            teacherSave = teacherRepository.save(teacherMapper.convertTeacherDtoToEntity(teacher));
         } catch (RuntimeException e) {
             log.info("Teacher can not be added" + e.getMessage());
         }
+        return teacherSave;
     }
 
     public void updateTeacherById(Long id, Teacher teacherUpdate) {
@@ -58,18 +62,33 @@ public class TeacherService {
         }
     }
 
-    public List<TeacherDto> getAllTeacher() {
-        List<TeacherDto> teacherListResponse = new ArrayList<>();
+    public List<Teacher> getAllTeacher() {
+        List<Teacher> teacherListResponse = new ArrayList<>();
         try {
             List<Teacher> teacherList = teacherRepository.findAll();
             for (Teacher teacher : teacherList) {
-                teacherListResponse.add(teacherMapper.convertTeacherToDto(teacher));
+                teacherListResponse.add(teacher);
             }
             return teacherListResponse;
         } catch (RuntimeException e) {
-            log.info( "Can't access teachers. See details: " + e);
+            log.info("Can't access teachers. See details: " + e);
             log.info(e.getMessage());
         }
         return teacherListResponse;
+    }
+
+    public Teacher getTeacherById(Long id) {
+        Teacher teacherResponse;
+        List<Teacher> teacherResponseList;
+        teacherResponseList = teacherRepository.findAll();
+        for (Teacher teacher : teacherResponseList) {
+            if (teacher.getId().equals(id)) {
+                teacherResponse = teacher;
+                log.info("Class Found! id: " + id);
+                return teacherResponse;
+            }
+        }
+        log.info("(!GetTeacherByID!) something went wrong when looking for id:" + id);
+        throw new TeacherException(id);
     }
 }

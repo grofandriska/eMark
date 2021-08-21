@@ -5,6 +5,7 @@ import com.codecool.vizsgaremek.modell.dto.TeacherDto;
 import com.codecool.vizsgaremek.service.TeacherService;
 
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -19,25 +20,30 @@ public class TeacherController {
 
 
     @PostMapping("add")
-    public void saveTeacher(@RequestBody TeacherDto teacher){
-        teacherService.saveTeacher(teacher);
+    public Teacher saveTeacher(@RequestBody TeacherDto teacher) {
+        return teacherService.saveTeacher(teacher);
     }
 
 
     @GetMapping("getAll")
-    public List<TeacherDto> getAllTeacher(){
+    public List<Teacher> getAllTeacher() {
         return teacherService.getAllTeacher();
     }
 
 
     @PutMapping("update/{id}")
-    public void updateTeacher(@PathVariable Long id, @RequestBody Teacher teacher){
-        teacherService.updateTeacherById(id,teacher);
+    public void updateTeacher(@PathVariable Long id, @RequestBody Teacher teacher) {
+        teacherService.updateTeacherById(id, teacher);
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteTeacher(@PathVariable Long id){
+    public void deleteTeacher(@PathVariable Long id) {
         teacherService.deleteTeacherById(id);
     }
 
+
+    @GetMapping("/{id}")
+    public Teacher getTeacherById(@PathVariable Long id) {
+        return teacherService.getTeacherById(id);
+    }
 }

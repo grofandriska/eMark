@@ -38,7 +38,7 @@ public class ClassController {
     }
 
     @GetMapping("getClassByName/{name}")
-    public ClassDto getClassByName(@PathVariable("name") String name) {
+    public Class getClassByName(@PathVariable("name") String name) {
         return classService.getClassByName(name);
     }
 

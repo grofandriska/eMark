@@ -91,5 +91,13 @@ public class ClassTest {
         }
     }
 
+    @Test
+    public void getClassByName() {
+        Class testClass = new Class(null, "1.A");
+        testClass = testRestTemplate.postForObject(baseUrl + "/add", testClass, Class.class);
+        Class result = testRestTemplate.getForObject(baseUrl + "/getClassByName/" + testClass.getName(), Class.class);
+        assertEquals(testClass.getName(), result.getName());
+    }
+
 
 }

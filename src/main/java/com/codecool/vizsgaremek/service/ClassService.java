@@ -34,13 +34,13 @@ public class ClassService {
         return classRepository.findAll();
     }
 
-    public ClassDto getClassByName(String className) {
-        ClassDto classResponse = new ClassDto();
+    public Class getClassByName(String className) {
+        Class classResponse = new Class();
         List<Class> classResponseList;
         classResponseList = classRepository.findAll();
         for (Class classEntity : classResponseList) {
             if (classEntity.getName().equals(className)) {
-                classResponse = classMapper.convertClassToDto(classEntity);
+                classResponse = classEntity;
                 return classResponse;
             }
         }
