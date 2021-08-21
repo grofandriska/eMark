@@ -60,6 +60,7 @@ public class ClassTest {
         testClass = testRestTemplate.postForObject(baseUrl + "/add", testClass, Class.class);
         testClass.setName("Updated name");
         testRestTemplate.put(baseUrl + "/updateClass/" + testClass.getId(), testClass);
+
         Class updatedClass = testRestTemplate.getForObject(baseUrl + "/getClassById/" + testClass.getId(), Class.class);
         assertEquals("Updated name", updatedClass.getName());
     }

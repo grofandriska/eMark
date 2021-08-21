@@ -87,31 +87,21 @@ public class MarkTest {
 
         Mark mark = new Mark(4L, 3.0, "JAVA", "June", studentTest, testTeacher);
 
+
         Mark result = testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
 
-        Mark test = testRestTemplate.getForObject(baseUrl + "/getMark/" + result.getId(), Mark.class);
-        assertEquals(result.getId(), test.getId());
+        assertEquals(result.getId(), mark.getId());
 
     }
 
     @Test
     public void update() {
-        Class testClass = new Class(1L, "1.A");
-        testRestTemplate.postForObject("http://localhost:" + port + "/class/add", testClass, Class.class);
-
-        Student studentTest = new Student(1L, testClass, "Kis Géza", "Male");
-        testRestTemplate.postForObject("http://localhost:" + port + "/student" + "/add", studentTest, Student.class);
-
         Teacher testTeacher = new Teacher(1L, "Erős Pista", "JAVA", "Male");
-        testRestTemplate.postForObject("http://localhost:" + port + "/teacher" + "/add", testTeacher, Teacher.class);
-
-        Mark mark = new Mark(4L, 3.0, "JAVA", "June", studentTest, testTeacher);
-        mark = testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
-
-        mark.setMonth("December");
-        testRestTemplate.put(baseUrl + "/update/" + mark.getId(), mark);
-        Mark updatedMark = testRestTemplate.getForObject(baseUrl + "/getMark/" + mark.getId(), Mark.class);
-        assertEquals("December", updatedMark.getMonth());
+        testTeacher = testRestTemplate.postForObject(baseUrl + "/add", testTeacher, Teacher.class);
+        testTeacher.setName("Updated name");
+        testRestTemplate.put(baseUrl + "/update/" + testTeacher.getId(), testTeacher);
+        Class updatedClass = testRestTemplate.getForObject(baseUrl + "/" + testTeacher.getId(), Class.class);
+        assertEquals("Updated name", updatedClass.getName());
     }
 
     @Test

@@ -41,7 +41,7 @@ public class MarkService {
     public Mark getMarkById(Long id) {
         Mark responseMark = new Mark();
         try {
-            responseMark = markRepository.getById(id);
+            responseMark = markRepository.findById(id).get();
             log.info("Mark found by :" + id);
             return responseMark;
 
