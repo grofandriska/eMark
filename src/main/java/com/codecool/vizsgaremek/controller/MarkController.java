@@ -1,9 +1,7 @@
 package com.codecool.vizsgaremek.controller;
 
 import com.codecool.vizsgaremek.modell.Mark;
-import com.codecool.vizsgaremek.modell.dto.MarkDto;
 import com.codecool.vizsgaremek.service.MarkService;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

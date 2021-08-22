@@ -30,7 +30,7 @@ Tanárok lekérése /teacher/getAllTeacher (GET)
 
 Tanár frissítése id alapján /teacher/updateTeacher/{id} (PUT)
 
-Tanár törlése /teacher/deleteTeacher/{id} "csak akkor lehet ha már nincs függősége jegyekre" (DELETE)
+Tanár törlése /teacher/deleteTeacher/{id}   jegyekre" (DELETE)
 
 ------------------------------------------------------------------------------
 

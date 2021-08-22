@@ -1,4 +1,4 @@
-package com.codecool.vizsgaremek;
+package com.codecool.vizsgaremek.IT;
 
 import com.codecool.vizsgaremek.exception.advice.TeacherAdvice;
 import com.codecool.vizsgaremek.modell.Class;

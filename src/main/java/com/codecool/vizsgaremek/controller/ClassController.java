@@ -1,7 +1,6 @@
 package com.codecool.vizsgaremek.controller;
 
 import com.codecool.vizsgaremek.modell.Class;
-import com.codecool.vizsgaremek.modell.dto.ClassDto;
 import com.codecool.vizsgaremek.service.ClassService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;

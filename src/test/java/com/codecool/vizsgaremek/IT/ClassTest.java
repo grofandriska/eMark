@@ -1,4 +1,4 @@
-package com.codecool.vizsgaremek;
+package com.codecool.vizsgaremek.IT;
 
 import com.codecool.vizsgaremek.modell.Class;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,9 +58,9 @@ public class ClassTest {
     public void update() {
         Class testClass = new Class(null, "1.A");
         testClass = testRestTemplate.postForObject(baseUrl + "/add", testClass, Class.class);
+
         testClass.setName("Updated name");
         testRestTemplate.put(baseUrl + "/updateClass/" + testClass.getId(), testClass);
-
         Class updatedClass = testRestTemplate.getForObject(baseUrl + "/getClassById/" + testClass.getId(), Class.class);
         assertEquals("Updated name", updatedClass.getName());
     }
@@ -70,23 +70,15 @@ public class ClassTest {
         Class testClass1 = new Class(null, "2.A");
         Class testClass2 = new Class(null, "7.B");
         Class testClass3 = new Class(null, "5.C");
-
         List<Class> testClasses = new ArrayList<>();
-
         testClasses.add(testClass1);
         testClasses.add(testClass2);
         testClasses.add(testClass3);
-
-        testClasses.forEach(testClass -> testClass.setId(testRestTemplate.postForObject(baseUrl + "/add", testClass, Class.class).getId())
-        );
-
+        testClasses.forEach(testClass -> testClass.setId(testRestTemplate.postForObject(baseUrl + "/add", testClass, Class.class).getId()));
         testRestTemplate.delete(baseUrl + "/deleteClass/" + testClass2.getId());
         testClasses.remove(testClass2);
-
         List<Class> remainingClass = List.of(testRestTemplate.getForObject(baseUrl + "/getAllClass", Class[].class));
-
         assertEquals(testClasses.size(), remainingClass.size());
-
         for (int i = 0; i < testClasses.size(); i++) {
             assertEquals(testClasses.get(i).getName(), remainingClass.get(i).getName());
         }

@@ -11,6 +11,7 @@ public class ClassAdvice {
     @ResponseBody
     @ExceptionHandler(ClassException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
+
     String classNotFound(ClassException exception){
         return exception.getMessage();
     }

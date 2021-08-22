@@ -1,6 +1,5 @@
 package com.codecool.vizsgaremek.service;
 
-
 import com.codecool.vizsgaremek.exception.TeacherException;
 import com.codecool.vizsgaremek.mapper.TeacherMapper;
 import com.codecool.vizsgaremek.modell.Teacher;
@@ -35,6 +34,7 @@ public class TeacherService {
     }
 
     public void updateTeacherById(Long id, Teacher teacherUpdate) {
+
         try {
             Teacher teacher = teacherRepository.findById(id).get();
             teacher.setName(teacherUpdate.getName());

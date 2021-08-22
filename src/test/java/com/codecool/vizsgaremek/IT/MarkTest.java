@@ -1,4 +1,4 @@
-package com.codecool.vizsgaremek;
+package com.codecool.vizsgaremek.IT;
 
 import com.codecool.vizsgaremek.modell.Class;
 import com.codecool.vizsgaremek.modell.Mark;
