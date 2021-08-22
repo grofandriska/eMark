@@ -43,42 +43,45 @@ public class ClassService {
                 return classResponse;
             }
         }
-        log.info("(!getClassByName!)Something went wrong when looking for class by given name :" + className);
-        return classResponse;
+        log.info("  (!getClassByName!)  Class not found by :" + className);
+        throw new RuntimeException("Can't get class by this name !");
+
     }
 
     public Class getClassById(Long id) {
-        Class classResponse;
-        List<Class> classResponseList;
-        classResponseList = classRepository.findAll();
-        for (Class aClass : classResponseList) {
-            if (aClass.getId().equals(id)) {
-                classResponse = aClass;
-                log.info("Class Found! id: " + id);
-                return classResponse;
-            }
+        try {
+            Class classResponse;
+            classResponse = classRepository.findById(id).get();
+            return classResponse;
+        } catch (RuntimeException e) {
+            log.info("Class not found ! "+ e );
         }
-        log.info("(!GetClassByID!) something went wrong when looking for id:" + id);
         throw new ClassException(id);
-
     }
 
     public void deleteClass(long id) {
         try {
             classRepository.deleteById(id);
         } catch (ClassException e) {
-            log.info("Can't delete class , with student's inside !");
+            log.info("Can't delete class , with student's inside !yet...");
             log.info(e.getMessage());
+            throw new ClassException(id);
         }
     }
 
     public void updateClass(Long id, Class update) {
-        classRepository.findById(id).map(classE -> {
-            classE.setId(update.getId());
-            classE.setName(update.getName());
-            return classRepository.save(classE);
-        });
+        try {
+            classRepository.findById(id).map(classE -> {
+                classE.setId(update.getId());
+                classE.setName(update.getName());
+                return classRepository.save(classE);
+            });
 
+        } catch (ClassException e) {
+            log.info("Couldn't update " + id + "id class , see details.");
+            System.out.println(e);
+            throw new ClassException(id);
+        }
     }
 
 }

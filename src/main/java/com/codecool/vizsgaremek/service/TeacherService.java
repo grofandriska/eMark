@@ -24,17 +24,17 @@ public class TeacherService {
     }
 
     public Teacher saveTeacher(Teacher teacher) {
-        Teacher teacherSave = new Teacher();
+        Teacher teacherSave ;
         try {
             teacherSave = teacherRepository.save(teacher);
         } catch (RuntimeException e) {
             log.info("Teacher can not be added" + e.getMessage());
+            throw new RuntimeException("Can't save teacher !");
         }
         return teacherSave;
     }
 
     public void updateTeacherById(Long id, Teacher teacherUpdate) {
-
         try {
             Teacher teacher = teacherRepository.findById(id).get();
             teacher.setName(teacherUpdate.getName());
@@ -44,9 +44,7 @@ public class TeacherService {
         } catch (TeacherException e) {
             log.info("Something went wrong when updating Teacher by id :" + id);
             log.info("See details :" + e);
-
             throw new TeacherException(id);
-
         }
     }
 

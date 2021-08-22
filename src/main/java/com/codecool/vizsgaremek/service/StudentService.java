@@ -36,8 +36,8 @@ public class StudentService {
     }
 
     public Student getStudentById(Long id) {
-        return studentRepository.findById(id).get();
-        /*Student studentResponse;
+
+        Student studentResponse;
         List<Student> studentResponseList;
         studentResponseList = studentRepository.findAll();
         for (Student student : studentResponseList) {
@@ -48,7 +48,7 @@ public class StudentService {
             }
         }
         log.info("(!GetStudentByID!) something went wrong when looking for id:" + id);
-        throw new StudentException(id);*/
+        throw new StudentException(id);
     }
 
     public void deleteStudent(Long id) {

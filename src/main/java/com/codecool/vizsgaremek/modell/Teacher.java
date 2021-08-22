@@ -16,6 +16,7 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Full name is mandatory")
     private String name;
     @NotBlank(message = "Subject name is mandatory")

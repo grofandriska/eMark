@@ -72,7 +72,7 @@ public class StudentUnitTest {
     }
 
     @Test
-    public void addStudentReturnsSame() throws Exception {
+    public void addStudent_returnsTheStudent() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Student student = new Student(1L, classOne, "Petike", "Male");
         when(studentService.save(student)).thenReturn(student);
@@ -80,7 +80,7 @@ public class StudentUnitTest {
     }
 
     @Test
-    public void getStudentByClass() throws Exception {
+    public void getStudentByClassId() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Class classTwo = new Class(2L, "2.A");
 

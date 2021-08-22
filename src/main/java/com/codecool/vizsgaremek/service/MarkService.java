@@ -28,45 +28,45 @@ public class MarkService {
     }
 
     public Mark add(Mark mark) {
-        Long id = mark.getTeacher().getId();
-        Teacher teacher = teacherRepository.findById(id).get();
-        if (teacher.getSubject().equals(mark.getSubject())) {
-            markRepository.save(mark);
-        } else {
-            throw new RuntimeException("Please check your saving data ");
+        try {
+            Long teacherId = mark.getTeacher().getId();
+            Teacher teacher = teacherRepository.findById(teacherId).get();
+            if (teacher.getSubject().equals(mark.getSubject())) {
+                markRepository.save(mark);
+            }
+        } catch (RuntimeException e) {
+            log.info("Exception details:"+e);
+            throw new RuntimeException("Please check your saving data. Teacher's subject and the mark's subject must match !  ");
         }
         return mark;
     }
 
     public Mark getMarkById(Long id) {
-       /* Mark responseMark = new Mark();
+
         try {
+            Mark responseMark;
             responseMark = markRepository.findById(id).get();
             log.info("Mark found by :" + id);
             return responseMark;
 
         } catch (MarkException exception) {
             log.info("Something went wrong when looking for Mark by ID :" + id + " see Details" + exception.getMessage());
-        }*/
-        return markRepository.findById(id).get();
+            throw new MarkException(id);
+        }
     }
 
     public List<Mark> getMarkList() {
-        List<Mark> marks = markRepository.findAll();
-        List<Mark> marksResponse = new ArrayList<>();
-        for (Mark mark : marks) {
-            marksResponse.add(mark);
-        }
-        return marksResponse;
+        return markRepository.findAll();
+
     }
 
     public void deleteMarkByID(Long id) {
         try {
             markRepository.deleteById(id);
         } catch (MarkException e) {
-            log.info("Something went wrong when looking for Mark_id :" + id + "! see Details" + e.getMessage());
+            log.info("went wrong when deleting Mark :" + id + "id ! see Details" + e.getMessage());
+            throw new MarkException(id);
         }
-
     }
 
     public Mark update(Long id, Mark mark) {

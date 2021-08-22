@@ -62,11 +62,11 @@ public class MarkUnitTest {
     }
 
     @Test
-    public void findMarkByIdAndUrlIsOk() throws Exception {
+    public void findByIdAndURLIsOk() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         Student student = new Student(1L, classOne, "Petike", "Male");
-        Mark mark = new Mark(1l, 2.0, "Matek", "June", student, teacherOne);
+        Mark mark = new Mark(1L, 2.0, "Matek", "June", student, teacherOne);
 
         mockMvc.perform(get("/getMarks/" + mark.getId())).andExpect(status().is(404));
         mockMvc.perform(get("/mark/getMark/" + mark.getId())).andExpect(status().isOk());
@@ -74,11 +74,12 @@ public class MarkUnitTest {
     }
 
     @Test
-    public void AddMarkReturnsSameClass() {
+    public void AddMarkReturnsSameObject() {
         Class classOne = new Class(1L, "1.A");
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         Student student = new Student(1L, classOne, "Petike", "Male");
         Mark mark = new Mark(1l, 2.0, "Matek", "June", student, teacherOne);
         when(markService.add(mark)).thenReturn(mark);
     }
+
 }
