@@ -8,7 +8,7 @@ E-kéta alkalmazás . Tanárok, diákok, jegyek és osztályok tárolása H2-ada
 
 Osztály :
 
-Osztály létrehozása JSON-objektumon keresztül /class/addClass (POST)
+Osztály létrehozása JSON-objektumon keresztül /class/add (POST)
 
 Osztály törlése /class/deleteClass/{id} (DELETE)
 
@@ -24,43 +24,45 @@ Osztály lekérése id alapján /class/getClassById/{id} (GET)
 
 Tanár :
 
-Tanár hozzáadása JSON-objektumon keresztül /teacher/addTeacher (Post)
+Tanár hozzáadása JSON-objektumon keresztül /teacher/add (Post)
 
-Tanárok lekérése /teacher/getAllTeacher (GET)
+Tanárok lekérése /teacher/getAll (GET)
 
-Tanár frissítése id alapján /teacher/updateTeacher/{id} (PUT)
+Tanár frissítése id alapján /teacher/update/{id} (PUT)
 
-Tanár törlése /teacher/deleteTeacher/{id}   jegyekre" (DELETE)
+Tanár törlése /teacher/delete/{id}   jegyekre" (DELETE)
 
 ------------------------------------------------------------------------------
 
 Diák :
 
-Diák hozzáadása JSON-objektumon keresztül /student/addStudent (GET)
+Diák hozzáadása JSON-objektumon keresztül /student/add (GET)
 
 Diák frissítése JSON-objektumon keresztül /student/update (POST)
 
 Diák Törlése /student/delete/{id} csak akkor lehet ha már nincs függősége jegyekre (DELETE)
 
-Diákok lekérése /student/getAllStudent (GET)
+Diákok lekérése /student/getAll (GET)
 
-Diákok lekérése osztály id alapján /student/byClass/{id} (GET)
+Diák lekérése /student/get (GET)
 
-Diákok lekérése nem alapján /student/byGenre/{gender} (GET)
+Diákok lekérése osztály id alapján /student/class/{id} (GET)
+
+Diákok lekérése nem alapján /student/gender/{gender} (GET)
 
 ------------------------------------------------------------------------------
 
 Osztályzat :
 
-Osztályzatok lekérése /mark/getAllMark (GET)
+Osztályzatok lekérése /mark/getAll (GET)
 
-Osztályzat hozzáadása /mark/addMark(POST) "A tanár Subject és Mark subject meg kell hogy egyezzen"
+Osztályzat hozzáadása /mark/add(POST) "A tanár Subject és Mark subject meg kell hogy egyezzen"
 
-Osztályzat lekérése id alapján /mark/getMarkById/{id} (GET)
+Osztályzat lekérése id alapján /mark/getMark/{id} (GET)
 
-Osztályzat törlése id alapján /mark/deleteMarkById/{id} 
+Osztályzat törlése id alapján /mark/delete/{id} 
 
-Osztályzat frissítése id alapján JSON-objektummal /mark/updateMarkById/{id} (PUT)
+Osztályzat frissítése id alapján JSON-objektummal /mark/update/{id} (PUT)
 
 Átlag lekérése diák id alapján /mark/getAverage/{id} (GET)
 
