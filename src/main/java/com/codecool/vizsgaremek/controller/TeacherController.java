@@ -3,8 +3,10 @@ package com.codecool.vizsgaremek.controller;
 import com.codecool.vizsgaremek.modell.Teacher;
 import com.codecool.vizsgaremek.service.TeacherService;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +20,7 @@ public class TeacherController {
     }
 
     @PostMapping("add")
-    public Teacher saveTeacher(@RequestBody Teacher teacher) {
+    public Teacher saveTeacher(@Valid @RequestBody Teacher teacher, BindingResult bindingResult) {
         return teacherService.saveTeacher(teacher);
     }
 
@@ -28,7 +30,12 @@ public class TeacherController {
     }
 
     @PutMapping("update/{id}")
-    public void updateTeacher(@PathVariable Long id, @RequestBody Teacher teacher) {
+    public void updateTeacher(@PathVariable Long id, @Valid @RequestBody Teacher teacher, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult
+                    .getAllErrors()
+                    .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
+        }
         teacherService.updateTeacherById(id, teacher);
     }
 

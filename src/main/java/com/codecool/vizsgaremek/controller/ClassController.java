@@ -29,7 +29,6 @@ public class ClassController {
             bindingResult
                     .getAllErrors()
                     .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
-            return null;
         }
         return classService.addClass(classEntity);
     }
@@ -57,7 +56,6 @@ public class ClassController {
             bindingResult
                     .getAllErrors()
                     .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
-            return;
         }
         classService.updateClass(id, classEntity);
     }

@@ -62,7 +62,7 @@ public class MarkUnitTest {
     }
 
     @Test
-    public void findByIdAndURLIsOk() throws Exception {
+    public void findByIdAnd() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         Student student = new Student(1L, classOne, "Petike", "Male");
@@ -74,12 +74,20 @@ public class MarkUnitTest {
     }
 
     @Test
-    public void AddMarkReturnsSameObject() {
+    public void Add_ReturnsSame() {
         Class classOne = new Class(1L, "1.A");
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         Student student = new Student(1L, classOne, "Petike", "Male");
-        Mark mark = new Mark(1l, 2.0, "Matek", "June", student, teacherOne);
+        Mark mark = new Mark(1L, 2.0, "Matek", "June", student, teacherOne);
         when(markService.add(mark)).thenReturn(mark);
     }
 
+    @Test
+    public void getStudentAverage()throws Exception{
+        Class classOne = new Class(1L, "1.A");
+        Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
+        Student student = new Student(1L, classOne, "Petike", "Male");
+
+        when(markService.getStudentAverage(student.getId())).thenReturn(2.3);
+    }
 }

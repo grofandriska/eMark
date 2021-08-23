@@ -30,7 +30,7 @@ public class ClassUnitTest {
     private ClassService service;
 
     @Test
-    public void findAllAndUrlIsOk() throws Exception {
+    public void findAll() throws Exception {
 
         Class classOne = new Class(1L, "1.A");
         Class classTwo = new Class(2L, "2.A");
@@ -50,7 +50,7 @@ public class ClassUnitTest {
     }
 
     @Test
-    public void findClassByIdAndUrlIsOk() throws Exception {
+    public void findById() throws Exception {
         Class classOne = new Class(1L, "3.B");
         mockMvc.perform(get("/class/getClassByID/" + classOne.getId())).andExpect(status().is(404));
         mockMvc.perform(get("/class/getClassById/" + classOne.getId())).andExpect(status().isOk());
@@ -58,7 +58,7 @@ public class ClassUnitTest {
     }
 
     @Test
-    public void findClassByNameAndUrlIsOk() throws Exception {
+    public void findByName() throws Exception {
         Class classOne = new Class(1L, "3.B");
         mockMvc.perform(get("/class/getClassByNam/" + classOne.getName())).andExpect(status().is(404));
         mockMvc.perform(get("/class/getClassByName/" + classOne.getName())).andExpect(status().isOk());
@@ -66,9 +66,13 @@ public class ClassUnitTest {
     }
 
     @Test
-    public void AddClassReturnsSameClassAnd400AtURLDueEmptyBody() throws Exception {
+    public void add_returnsSame() throws Exception {
         Class classOne = new Class(1L, "3.B");
         when(service.addClass(classOne)).thenReturn(classOne);
-        mockMvc.perform(post("/class/add",classOne)).andExpect(status().is(400));
+        mockMvc.perform(post("/class/add", classOne)).andExpect(status().is(400));
     }
+
+
+
+
 }

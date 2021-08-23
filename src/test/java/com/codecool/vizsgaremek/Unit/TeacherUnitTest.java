@@ -30,7 +30,7 @@ public class TeacherUnitTest {
     private MockMvc mockMvc;
 
     @Test
-    public void findAllAndUrlIsOk() throws Exception {
+    public void findAll() throws Exception {
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         Teacher teacherTwo = new Teacher(2L, "Kiss Géza", "Töri", "Male");
         Teacher teacherThree = new Teacher(3L, "Első Károly", "Tesi", "Male");
@@ -57,7 +57,7 @@ public class TeacherUnitTest {
     }
 
     @Test
-    public void findTeacherByIdAndUrlIsOk() throws Exception {
+    public void findById() throws Exception {
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         mockMvc.perform(get("/teacher/get" + teacherOne.getId())).andExpect(status().is(400));
         mockMvc.perform(get("/teacher/" + teacherOne.getId())).andExpect(status().isOk());
@@ -65,7 +65,7 @@ public class TeacherUnitTest {
     }
 
     @Test
-    public void AddClassReturnsSameClass() {
+    public void AddReturnsSame() {
         Teacher teacherOne = new Teacher(1L, "Nagy Péter", "Matek", "Male");
         when(service.saveTeacher(teacherOne)).thenReturn(teacherOne);
     }

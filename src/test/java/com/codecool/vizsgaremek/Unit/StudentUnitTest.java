@@ -63,7 +63,7 @@ public class StudentUnitTest {
     }
 
     @Test
-    public void findStudentById() throws Exception {
+    public void findById() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Student student = new Student(1L, classOne, "Petike", "Male");
         mockMvc.perform(get("/student/get" + student.getId())).andExpect(status().is(400));
@@ -72,7 +72,7 @@ public class StudentUnitTest {
     }
 
     @Test
-    public void addStudent_returnsTheStudent() throws Exception {
+    public void add_returnsTheStudent() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Student student = new Student(1L, classOne, "Petike", "Male");
         when(studentService.save(student)).thenReturn(student);
@@ -80,7 +80,7 @@ public class StudentUnitTest {
     }
 
     @Test
-    public void getStudentByClassId() throws Exception {
+    public void getByClassId() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Class classTwo = new Class(2L, "2.A");
 
@@ -106,7 +106,7 @@ public class StudentUnitTest {
     }
 
     @Test
-    public void getStudentByGender() throws Exception {
+    public void getByGender() throws Exception {
         Class classOne = new Class(1L, "1.A");
         Class classTwo = new Class(2L, "2.A");
 
@@ -130,21 +130,7 @@ public class StudentUnitTest {
                 .andExpect(jsonPath("$[1].gender", is(studentTwo.getGender())));
     }
 
-    @Test
-    public void AddStudentReturnsSameStudent() {
-        Class classOne = new Class(1L, "1.A");
-        Student student = new Student(1L, classOne, "Petike", "Male");
-        when(studentService.save(student)).thenReturn(student);
-    }
 
-    @Test
-    public void findStudentByIdAndUrlIsOk() throws Exception {
-        Class classOne = new Class(1L, "1.A");
-        Student student = new Student(1L, classOne, "Petike", "Male");
-        mockMvc.perform(get("/student/get" + student.getId())).andExpect(status().is(400));
-        mockMvc.perform(get("/student/" + student.getId())).andExpect(status().isOk());
-        when(studentService.getStudentById(1L)).thenReturn(student);
-    }
 
 
 }

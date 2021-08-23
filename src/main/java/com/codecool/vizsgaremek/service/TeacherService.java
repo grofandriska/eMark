@@ -14,9 +14,9 @@ import java.util.List;
 @Slf4j
 public class TeacherService {
 
-    TeacherRepository teacherRepository;
+    private TeacherRepository teacherRepository;
 
-    TeacherMapper teacherMapper;
+    private TeacherMapper teacherMapper;
 
     public TeacherService(TeacherRepository teacherRepository, TeacherMapper teacherMapper) {
         this.teacherRepository = teacherRepository;

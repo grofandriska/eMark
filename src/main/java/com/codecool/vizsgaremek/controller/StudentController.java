@@ -2,8 +2,10 @@ package com.codecool.vizsgaremek.controller;
 
 import com.codecool.vizsgaremek.modell.Student;
 import com.codecool.vizsgaremek.service.StudentService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/student")
@@ -22,7 +24,12 @@ public class StudentController {
     }
 
     @PostMapping("add")
-    public Student save(@RequestBody Student student) {
+    public Student save(@Valid @RequestBody Student student, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult
+                    .getAllErrors()
+                    .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
+        }
         return studentService.save(student);
     }
 
@@ -42,7 +49,12 @@ public class StudentController {
     }
 
     @PutMapping("/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody Student student) {
+    public void update(@PathVariable Long id,@Valid @RequestBody Student student,BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult
+                    .getAllErrors()
+                    .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
+        }
         studentService.updateStudent(id, student);
     }
 

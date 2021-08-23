@@ -147,4 +147,47 @@ public class MarkTest {
             assertEquals(markList.get(i).getMark(), remainingMarks.get(i).getMark());
         }
     }
+
+    @Test
+    public void getAverage() {
+        Class testClass = new Class(1L, "1.A");
+        testRestTemplate.postForObject("http://localhost:" + port + "/class/add", testClass, Class.class);
+
+        Student studentTest = new Student(1L, testClass, "Kis Géza", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/student" + "/add", studentTest, Student.class);
+
+        Teacher testTeacher = new Teacher(1L, "Erős Pista", "JAVA", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/teacher" + "/add", testTeacher, Teacher.class);
+
+        Mark mark = new Mark(null, 5.0, "JAVA", "June", studentTest, testTeacher);
+        testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
+
+        Mark markTwo = new Mark(null, 3.0, "JAVA", "June", studentTest, testTeacher);
+        testRestTemplate.postForObject(baseUrl + "/add", markTwo, Mark.class);
+
+        Double temp = testRestTemplate.getForObject(baseUrl + "/average/" + studentTest.getId(), Double.class);
+        assertEquals(4, temp);
+    }@Test
+
+    public void getAverageBySubject() {
+        Class testClass = new Class(1L, "1.A");
+        testRestTemplate.postForObject("http://localhost:" + port + "/class/add", testClass, Class.class);
+
+        Student studentTest = new Student(1L, testClass, "Kis Géza", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/student" + "/add", studentTest, Student.class);
+
+        Teacher testTeacher = new Teacher(1L, "Erős Pista", "JAVA", "Male");
+        testRestTemplate.postForObject("http://localhost:" + port + "/teacher" + "/add", testTeacher, Teacher.class);
+
+        Mark mark = new Mark(null, 5.0, "JAVA", "June", studentTest, testTeacher);
+        testRestTemplate.postForObject(baseUrl + "/add", mark, Mark.class);
+
+        Mark markTwo = new Mark(null, 3.0, "JAVA", "June", studentTest, testTeacher);
+        testRestTemplate.postForObject(baseUrl + "/add", markTwo, Mark.class);
+
+        Double temp = testRestTemplate.getForObject(baseUrl + "/get/"+studentTest.getId()+"/"+testTeacher.getSubject() , Double.class);
+        assertEquals(4, temp);
+    }
+
+
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -17,6 +18,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @NotNull(message = "student must have a class !")
     private Class className;
     @NotBlank(message = "Full name is mandatory")
     private String studentName;

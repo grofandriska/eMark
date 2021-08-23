@@ -4,7 +4,7 @@ import com.codecool.vizsgaremek.exception.MarkException;
 import com.codecool.vizsgaremek.mapper.MarkMapper;
 import com.codecool.vizsgaremek.modell.Mark;
 import com.codecool.vizsgaremek.modell.Teacher;
-import com.codecool.vizsgaremek.modell.dto.MarkDto;
+
 import com.codecool.vizsgaremek.repository.MarkRepository;
 import com.codecool.vizsgaremek.repository.TeacherRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +17,9 @@ import java.util.List;
 @Slf4j
 public class MarkService {
 
-    MarkRepository markRepository;
-    TeacherRepository teacherRepository;
-    MarkMapper markMapper;
+    private MarkRepository markRepository;
+    private TeacherRepository teacherRepository;
+    private MarkMapper markMapper;
 
     public MarkService(MarkRepository markRepository, TeacherRepository teacherRepository, MarkMapper markMapper) {
         this.markRepository = markRepository;

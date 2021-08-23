@@ -2,8 +2,10 @@ package com.codecool.vizsgaremek.controller;
 
 import com.codecool.vizsgaremek.modell.Mark;
 import com.codecool.vizsgaremek.service.MarkService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +24,12 @@ public class MarkController {
     }
 
     @PostMapping("add")
-    public Mark add(@RequestBody Mark mark) {
+    public Mark add(@Valid @RequestBody Mark mark, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult
+                    .getAllErrors()
+                    .forEach(errorObj -> System.out.println(errorObj.getDefaultMessage()));
+        }
        return markService.add(mark);
     }
 

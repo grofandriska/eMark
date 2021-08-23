@@ -2,6 +2,7 @@ package com.codecool.vizsgaremek.modell;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -11,11 +12,12 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Class {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Full name is mandatory")
+    @NotBlank(message = " Class name is mandatory !")
     private String name;
 }

@@ -1,9 +1,9 @@
 
+--I used java 16
+(mvn install
+mvn package
+mvn --version)
 
-copy mvn install
-copy mvn package
-copy mvn --version
-
-copy docker build . -t simple -f Dockerfile.dockerfile
+docker build . -t simple -f Dockerfile.dockerfile
 
 docker run -p 8080:8080 simple

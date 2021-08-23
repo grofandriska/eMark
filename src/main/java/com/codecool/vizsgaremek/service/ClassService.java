@@ -1,28 +1,24 @@
 package com.codecool.vizsgaremek.service;
 
 import com.codecool.vizsgaremek.exception.ClassException;
-import com.codecool.vizsgaremek.mapper.ClassMapper;
 import com.codecool.vizsgaremek.modell.Class;
-import com.codecool.vizsgaremek.modell.dto.ClassDto;
 import com.codecool.vizsgaremek.repository.ClassRepository;
-
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 
 @Service
 @Slf4j
 public class ClassService {
 
-    ClassRepository classRepository;
+    @Autowired
+    private ClassRepository classRepository;
 
-    ClassMapper classMapper;
-
-    public ClassService(ClassRepository classRepository, ClassMapper classMapper) {
+    public ClassService(ClassRepository classRepository) {
         this.classRepository = classRepository;
-        this.classMapper = classMapper;
+
     }
 
     public Class addClass(Class newClass) {

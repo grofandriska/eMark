@@ -1,11 +1,9 @@
 package com.codecool.vizsgaremek.service;
 
 import com.codecool.vizsgaremek.exception.StudentException;
-import com.codecool.vizsgaremek.exception.TeacherException;
 import com.codecool.vizsgaremek.mapper.StudentMapper;
 import com.codecool.vizsgaremek.modell.Student;
-import com.codecool.vizsgaremek.modell.Teacher;
-import com.codecool.vizsgaremek.modell.dto.StudentDto;
+
 import com.codecool.vizsgaremek.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,9 +15,9 @@ import java.util.List;
 @Slf4j
 public class StudentService {
 
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
-    StudentMapper studentMapper;
+    private StudentMapper studentMapper;
 
     public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
         this.studentRepository = studentRepository;
