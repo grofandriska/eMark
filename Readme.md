@@ -1,5 +1,7 @@
 Gróf András
 
+Java + Spring-boot + Docker
+
 Vizsga project leírás
 
 E-kéta alkalmazás . Tanárok, diákok, jegyek és osztályok tárolása H2-adatbázisban.
